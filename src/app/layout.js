@@ -1,5 +1,9 @@
+import { ThemeProvider } from "@/components/shadcn-ui/theme-provider"
 import { Inter } from 'next/font/google'
-import './globals.css'
+import './global.css'
+import AvatarUse from "@/components/shadcn-ui/AvatarUse"
+import { ModeToggle } from "@/components/shadcn-ui/ModeToggle"
+import DropDown from "@/components/shadcn-ui/DropDown"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +15,25 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+       <body className={inter.className}>
+
+        <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+          <header className="flex justify-between min-w-full p-4 my-2">
+              <span className="flex">
+                <ModeToggle />
+                <AvatarUse/>
+              </span>
+              <DropDown display={"Navigation"} label={"Select a page"} items={"Home"}/>
+          </header>
+            {children} 
+        </ThemeProvider>
+          
+        </body>
     </html>
   )
 }
