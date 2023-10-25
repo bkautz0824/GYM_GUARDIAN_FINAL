@@ -6,6 +6,7 @@ import { ModeToggle } from "@/components/shadcn-ui/ModeToggle"
 import DropDown from "@/components/shadcn-ui/DropDown"
 import Headerr from "@/components/newui/head"
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
