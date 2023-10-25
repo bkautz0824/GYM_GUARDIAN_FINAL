@@ -4,7 +4,8 @@ import './global.css'
 import AvatarUse from "@/components/shadcn-ui/AvatarUse"
 import { ModeToggle } from "@/components/shadcn-ui/ModeToggle"
 import DropDown from "@/components/shadcn-ui/DropDown"
-import StateContextProvider from '@/context/exercise-context'
+import Headerr from "@/components/newui/head"
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,13 +25,18 @@ export default function RootLayout({ children }) {
               enableSystem
               disableTransitionOnChange
             >
-          <header className="flex justify-between min-w-full p-4 my-2">
-              <span className="flex">
-                <ModeToggle />
-                <AvatarUse/>
-              </span>
-              <DropDown display={"Navigation"} label={"Select a page"} items={"Home"}/>
-          </header>
+
+<header
+          className="block"
+          style={{ position: 'relative', top:0, bottom: 0, left: 0, right: 0 }}
+        >
+              <Headerr/>
+              
+                {/* <ModeToggle />
+                <AvatarUse/> */}
+              {/* <DropDown display={"Navigation"} label={"Select a page"} items={"Home"}/> */}
+                  </header>   
+    
             {children} 
         </ThemeProvider>
           
