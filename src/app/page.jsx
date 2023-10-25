@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen p-5 justify-evenly">
      <TypographyH1 text={"Hellooooo"}/>
-     <Link href="/builder" className={buttonVariants({ variant: "outline" })+ " bg-green-700"}>Builder</Link>
+     <Link href="/builder" className={buttonVariants({ variant: "outline" })+ " bg-green-600"}>Create New Workout</Link>
     </main>
   )
 }

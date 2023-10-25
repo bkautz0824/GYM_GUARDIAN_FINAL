@@ -4,6 +4,7 @@ import './global.css'
 import AvatarUse from "@/components/shadcn-ui/AvatarUse"
 import { ModeToggle } from "@/components/shadcn-ui/ModeToggle"
 import DropDown from "@/components/shadcn-ui/DropDown"
+import StateContextProvider from '@/context/exercise-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
