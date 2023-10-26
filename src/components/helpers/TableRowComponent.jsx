@@ -25,6 +25,7 @@ const TableRowComponent = ({
           key={`reps_${index}`}
           value={reps}
           type="number"
+          min={0}
           placeholder="0"
           onChange={(e) => handleChange(index, "reps", e.target.value)}
         />
@@ -35,6 +36,7 @@ const TableRowComponent = ({
           type="number"
           placeholder="0"
           step="5"
+          min={0}
           value={weight}
           onChange={(e) => handleChange(index, "weight", e.target.value)}
         />
@@ -49,7 +51,7 @@ const TableRowComponent = ({
         />
       </TableCell>
       <TableCell>
-        <Button variant="outline" onClick={() => handleDelete(index)}>
+        <Button className="shadow-sm bg-primary shadow-inherit" variant="ghost" onClick={() => handleDelete(index)}>
           X
         </Button>
       </TableCell>

@@ -13,8 +13,8 @@ function RHeader() {
   return (
     <> 
     
-    <section className="bg-black py-10"> {/* Increased padding for better spacing */}
-      <div className="max-w-screen-xl mx-auto px-4"> {/* Center content with max-width */}
+    <section className="py-10 bg-black"> {/* Increased padding for better spacing */}
+      <div className="max-w-screen-xl px-4 mx-auto"> {/* Center content with max-width */}
         <div className="flex items-center justify-between">
           <div className="flex items-center"> {/* Center the logo and text */}
 
@@ -30,10 +30,10 @@ function RHeader() {
               height="40"
             />
 
-            <ModeToggle />
+            {/* <ModeToggle /> */}
 
               </Link>
-            <h1 className="text-white ml-2 text-2xl font-bold">Welcome to Gym Guardian</h1>
+            <h1 className="ml-2 text-2xl font-bold text-white">Welcome to Gym Guardian</h1>
           </div>
           <p className="text-sm text-gray-400">
              &nbsp; B & D Developers

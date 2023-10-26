@@ -21,21 +21,21 @@ export default function RootLayout({ children }) {
 
         <ThemeProvider
               attribute="class"
-              defaultTheme="system"
+              defaultTheme="dark"
               enableSystem
               disableTransitionOnChange
             >
 
-<header
+        <header
           className="block"
           style={{ position: 'relative', top:0, bottom: 0, left: 0, right: 0 }}
         >
-              <Headerr/>
+            <Headerr/>
               
-                {/* <ModeToggle />
-                <AvatarUse/> */}
+            <ModeToggle />
+                {/* <AvatarUse/> */}
               {/* <DropDown display={"Navigation"} label={"Select a page"} items={"Home"}/> */}
-                  </header>   
+          </header>   
     
             {children} 
         </ThemeProvider>

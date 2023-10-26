@@ -161,13 +161,13 @@ export default function AreaOfFocus() {
       }
         </CardContent>
 
-      <Button
+      {/* <Button
       
         className={"bg-primary"}
         onClick={() => console.log(value)}
       >
         Submit Set Data
-      </Button>
+      </Button> */}
     </Card>
   )
 }
