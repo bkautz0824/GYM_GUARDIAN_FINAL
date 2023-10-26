@@ -79,7 +79,7 @@ export default function AreaOfFocus() {
 
   
   return (
-    <Card className={`m-5 bg-violet-700`}>
+    <Card className={`m-5 bg-violet-700 shadow-xl shadow-white/50`}>
         <CardHeader className="items-center bg">
             
             <TypographyH1 text={area}/>
@@ -162,8 +162,8 @@ export default function AreaOfFocus() {
         </CardContent>
 
       <Button
-        variant="outline"
-        className={"bg-green-600 "}
+      
+        className={"bg-primary"}
         onClick={() => console.log(value)}
       >
         Submit Set Data

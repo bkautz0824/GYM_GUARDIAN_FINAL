@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nivo/radar": "^0.83.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -25,8 +26,10 @@
     "next": "13.5.5",
     "next-themes": "^0.2.1",
     "react": "^18",
+    "react-charts": "^3.0.0-beta.56",
     "react-day-picker": "^8.9.1",
     "react-dom": "^18",
+    "recharts": "^2.9.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^4.4.4"
