@@ -59,14 +59,14 @@ export function BarGraphDisplay() {
     <BarChart data={barData}>
       <XAxis
         dataKey="name"
-        stroke="white"
+        stroke="grey"
         fontSize={12}
         tickLine={false}
         axisLine={true}
       />
       <YAxis
         tickMargin={5}
-        stroke="white"
+        stroke="grey"
         fontSize={12}
         tickLine={false}
         axisLine={true}
@@ -78,7 +78,7 @@ export function BarGraphDisplay() {
         // ]}
         // tickFormatter={(value) => `$${value}`}
       />
-      <Bar dataKey="total" fill="##3f3f46" radius={[4, 4, 0, 0]} />
+      <Bar dataKey="total" fill="#7c3aed" radius={[4, 4, 0, 0]} />
     </BarChart>
 </ResponsiveContainer>
   )

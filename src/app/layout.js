@@ -28,11 +28,13 @@ export default function RootLayout({ children }) {
 
         <header
           className="block"
-          style={{ position: 'relative', top:0, bottom: 0, left: 0, right: 0 }}
+          // style={{ position: 'relative', top:0, bottom: 0, left: 0, right: 0 }}
         >
             <Headerr/>
-              
-            <ModeToggle />
+            <span className="flex justify-end"> 
+              <ModeToggle />
+            </span>
+            
                 {/* <AvatarUse/> */}
               {/* <DropDown display={"Navigation"} label={"Select a page"} items={"Home"}/> */}
           </header>   

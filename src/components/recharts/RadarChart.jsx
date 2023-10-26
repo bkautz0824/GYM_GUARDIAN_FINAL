@@ -33,7 +33,7 @@ const data = [
     fullMark: 150,
   },
   {
-    subject: 'Shoulder',
+    subject: 'Shoulders',
     A: 65,
     B: 85,
     fullMark: 150,
@@ -47,7 +47,7 @@ export default function RadarChartDisplay() {
       <PolarGrid />
       <PolarAngleAxis dataKey="subject" />
       {/* <PolarRadiusAxis /> */}
-      <Radar name="Mike" dataKey="A" stroke="#adfa1d" fill="#adfa1d" fillOpacity={0.6} />
+      <Radar name="Mike" dataKey="A" stroke="#16a34a" fill="#16a34a" fillOpacity={0.6} />
     </RadarChart>
 </div>
   )

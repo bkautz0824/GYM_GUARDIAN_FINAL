@@ -9,11 +9,14 @@ export default function Home() {
   return (
     <div className='top-0 bottom-0 left-0 right-0 flex items-center justify-center w-full min-h-screen bg-fixed bg-center custom-img backdrop-blur z-1'>
         {/* <div className='absolute top-0 left-0 right-0 bg-black/60 z-[2]'/> */}
-        <div className='flex p-5 text-white z-[2] '>
+        <div className='flex p-5 text-white z-[2] justify-between w-1/2'>
         
+          
+          <Link href="/builder" className={buttonVariants({ variant: "default" })+ " bg-violet-700 shadow-md shadow-black/50 text-white"}>View My Workouts</Link>
           <Link href="/builder" className={buttonVariants({ variant: "default" })+ " bg-primary shadow-md shadow-black/50 text-white"}>Create New Workout</Link>
+          <Link href="/data-display" className={buttonVariants({ variant: "default" })+ " bg-violet-700 shadow-md shadow-black/50 text-white"}>My Workout Data</Link>
         </div>
-          <Link href="/builder" className={buttonVariants({ variant: "default" })+ " bg-primary shadow-md shadow-black/50"}>View Workout Records</Link>
+          
     </div>
     
     // <main className="flex min-h-screen p-5 justify-evenly">
