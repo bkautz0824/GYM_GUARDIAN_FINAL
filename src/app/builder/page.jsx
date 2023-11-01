@@ -13,14 +13,17 @@ export default function Builder() {
 
 
   return (
-    <Card className={`my-10 bg-violet-700`}>
-        <CardHeader className="items-center bg">
-            
-            <TypographyH1 text={'Builder'}/>
-            <TypographyMuted text={"Use this page to start building your own workout!"}/>
-        </CardHeader>
-        <CardContent>
-            <div className="p-4 space-x-4 border rounded-md ">
+    <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center custom-img`}>
+        <Card className="items-center bg-primary">
+            <CardHeader>
+                  <TypographyH1 text={'Builder'}/>
+            <TypographyP text={"Use this page to start building your own workout!"}/>
+            </CardHeader>
+          
+        </Card>
+     
+        <CardContent className="">
+            <div className="p-4 space-x-4 border rounded-md bg-violet-600">
                 <TypographyH3 text={"Select an area of focus..."} />
                 {
                 workouts.map((item) => {
@@ -44,6 +47,8 @@ export default function Builder() {
             }
             </div>
         </CardContent>
+
+ 
 
       
     </Card>
