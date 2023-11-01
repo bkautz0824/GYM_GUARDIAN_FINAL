@@ -15,6 +15,8 @@ export default function Home() {
           <Link href="/builder" className={buttonVariants({ variant: "default" })+ " bg-violet-700 shadow-md shadow-black/50 text-white"}>View My Workouts</Link>
           <Link href="/builder" className={buttonVariants({ variant: "default" })+ " bg-primary shadow-md shadow-black/50 text-white"}>Create New Workout</Link>
           <Link href="/data-display" className={buttonVariants({ variant: "default" })+ " bg-violet-700 shadow-md shadow-black/50 text-white"}>My Workout Data</Link>
+          <Link href="/calender" className={buttonVariants({ variant: "default" })+ " bg-violet-700 shadow-md shadow-black/50 text-white"}>Calendar</Link>
+
         </div>
           
     </div>
