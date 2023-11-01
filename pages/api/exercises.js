@@ -1,9 +1,3 @@
-// export default function handler(req, res){
-//     res.status(200).json({name: 'John Doe'})
-// }
-
-// posts.js
-// import User from "../../lib/mongodb/models/User";
 import clientPromise from "../../lib/mongodb";
 import _ from "lodash"
 
@@ -21,16 +15,16 @@ export default async function handler(req, res) {
       console.log(req.body)
   
 
-      let myPost = await db.collection("users").insertOne(req.body);
+      let myPost = await db.collection("Exercises").insertOne(req.body);
       res.json(myPost);
       break;
 
 
 
     case "GET":
-      const users = await db.collection("users").find({}).toArray();
-      console.log(users)
-      res.json({ status: 200, data: users });
+      const exercises = await db.collection("Exercises").find({}).toArray();
+      console.log(exercises)
+      res.json({ status: 200, data: exercises });
       break;
   }
 }
