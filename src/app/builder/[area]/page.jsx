@@ -39,10 +39,7 @@ export default function AreaOfFocus() {
   const searchParams = useSearchParams()
   const exercises = searchParams.getAll("exercises")
   const {area} = useParams()
- 
-  // const exercises = state.exercises
-  // const bodyPart = state.bodyPart
-  // const [value, setValue] = React.useState(null)
+
   const [open, setOpen] = React.useState(false)
   const [state, setState] = React.useState([]);
 

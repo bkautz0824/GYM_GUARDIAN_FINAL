@@ -7,6 +7,7 @@ import { TypographyH1 } from '@/components/typography/Typography';
 
 import RadarChartDisplay from '@/components/recharts/RadarChart';
 import { BarGraphDisplay } from '@/components/shadcn-ui/BarGraphDisplay'
+import {CustomActiveShapePieChart1, CustomActiveShapePieChart2} from '@/components/recharts/CustomShapePieChart';
 
 export default function DataDisplay() {
   return (
@@ -32,6 +33,17 @@ export default function DataDisplay() {
 
       </Card>
       <DataGridDisplay />
+      <div className='flex'>
+      <CustomActiveShapePieChart1 />
+
+      <CustomActiveShapePieChart2 />
+
+      <CustomActiveShapePieChart1 />
+
+      <CustomActiveShapePieChart2 />
+      </div>
+
+   
     </div>
     
    
