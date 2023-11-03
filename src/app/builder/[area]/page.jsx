@@ -77,7 +77,7 @@ export default function AreaOfFocus() {
   
   return (
     <Card className={`m-5 bg-primary shadow-xl shadow-white/50 text-primary`}>
-        <CardHeader className="items-center text-slate-600">
+        <CardHeader className="items-center text-slate-500">
             
             <TypographyH1 text={area}/>
             <TypographyP text={"Use this page to start building your own workout!"}/>

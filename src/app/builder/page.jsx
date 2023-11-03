@@ -40,7 +40,7 @@ export default function Builder() {
                                 }
                             } }
                       
-                            className={buttonVariants({ variant: "default" }) + "text-secondary"}
+                            className={buttonVariants({ variant: "secondary" }) + "text-secondary"}
                             >{item.muscle_group}
                         </Link>
                         </div>

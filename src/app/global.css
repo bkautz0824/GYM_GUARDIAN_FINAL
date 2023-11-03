@@ -71,7 +71,7 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
-    --image: url('https://i.pinimg.com/736x/76/da/03/76da03c579566626fa270bdb6df1280b.jpg');
+    --image: url('https://wallpaperswide.com/download/one_piece_luffy_3-wallpaper-1366x768.jpg');
   }
 
   [data-theme="franky"] {
@@ -143,6 +143,29 @@
     --image: url('https://staticg.sportskeeda.com/editor/2023/05/425f5-16829548801476-1920.jpg');
   }
 
+  [data-theme="chopper"] {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary:33 45% 58%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 358 52% 57%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.4 71.8% 29.2%;
+    --image: url('https://www.dexerto.com/cdn-cgi/image/width=3840,quality=75,format=auto/https://editors.dexerto.com/wp-content/uploads/2023/05/25/one-piece-tony-tony-chopper.jpeg');
+  }
+
 }
 
 
@@ -175,3 +198,4 @@
 /* sanji{
   https://staticg.sportskeeda.com/editor/2023/05/425f5-16829548801476-1920.jpg
 } */
+
