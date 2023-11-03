@@ -18,7 +18,7 @@ const TableRowComponent = ({
   handleDelete,
 }) => {
   return (
-    <TableRow key={index}>
+    <TableRow key={index} className="bg-secondary/80">
       <TableCell className="font-medium">{name}</TableCell>
       <TableCell>
         <Input
@@ -51,7 +51,7 @@ const TableRowComponent = ({
         />
       </TableCell>
       <TableCell>
-        <Button className="shadow-sm bg-primary shadow-inherit" variant="ghost" onClick={() => handleDelete(index)}>
+        <Button className="shadow-sm bg-secondary shadow-inherit" variant="ghost" onClick={() => handleDelete(index)}>
           X
         </Button>
       </TableCell>

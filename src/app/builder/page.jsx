@@ -13,7 +13,7 @@ export default function Builder() {
 
 
   return (
-    <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center custom-img`}>
+    <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover`}>
         <Card className="items-center bg-primary">
             <CardHeader>
                   <TypographyH1 text={'Builder'}/>
@@ -23,8 +23,11 @@ export default function Builder() {
         </Card>
      
         <CardContent className="">
-            <div className="p-4 space-x-4 border rounded-md bg-violet-600">
-                <TypographyH3 text={"Select an area of focus..."} />
+            <div className="p-4 space-x-4 ">
+                <Card className="p-4 bg-primary">
+                    <TypographyH3 text={"Select an area of focus..."} />
+                </Card>
+                
                 {
                 workouts.map((item) => {
                     return(
@@ -37,7 +40,7 @@ export default function Builder() {
                                 }
                             } }
                       
-                            className={buttonVariants({ variant: "outline" })}
+                            className={buttonVariants({ variant: "default" }) + "text-secondary"}
                             >{item.muscle_group}
                         </Link>
                         </div>

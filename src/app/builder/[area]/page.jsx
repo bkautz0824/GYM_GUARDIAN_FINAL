@@ -6,7 +6,7 @@ import {
     CardContent,
     CardHeader,
   } from "@/components/ui/card"
-import { TypographyH1, TypographyMuted, TypographyP, TypographyH3 } from '@/components/typography/Typography'
+import { TypographyLarge, TypographyH1, TypographyMuted, TypographyP, TypographyH3 } from '@/components/typography/Typography'
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 import {
   Table,
@@ -76,21 +76,21 @@ export default function AreaOfFocus() {
 
   
   return (
-    <Card className={`m-5 bg-violet-700 shadow-xl shadow-white/50`}>
-        <CardHeader className="items-center bg">
+    <Card className={`m-5 bg-primary shadow-xl shadow-white/50 text-primary`}>
+        <CardHeader className="items-center text-slate-600">
             
             <TypographyH1 text={area}/>
-            <TypographyMuted text={"Use this page to start building your own workout!"}/>
+            <TypographyP text={"Use this page to start building your own workout!"}/>
         </CardHeader>
         <CardContent>
 
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
-              variant="outline"
+              variant="secondary"
               role="combobox"
               aria-expanded={open}
-              className="w-[200px] justify-between mx-2 bg-neutral-700"
+              className="w-[200px] justify-between mx-2 text-slate-500"
             >
              
                 Select framework...
@@ -125,14 +125,14 @@ export default function AreaOfFocus() {
         </Popover>
       { state ? 
         <Table>
-          <TableCaption>Fill in your set details.  Set the reps, add more sets and write down any additional notes.</TableCaption>
+          <TableCaption  className="text-secondary">Fill in your set details.  Set the reps, add more sets and write down any additional notes.</TableCaption>
           <TableHeader>
-            <TableRow>
-              <TableHead className="w-[150px]">Exercise</TableHead>
-              <TableHead className="w-[150px]">Reps</TableHead>
-              <TableHead className="w-[150px]">Weight</TableHead>
-              <TableHead >Notes</TableHead>
-              <TableHead >Delete</TableHead>
+            <TableRow >
+              <TableHead className="w-[150px] text-slate-500">Exercise</TableHead>
+              <TableHead  className="w-[150px] text-slate-500">Reps</TableHead>
+              <TableHead className="w-[150px] text-slate-500">Weight</TableHead>
+              <TableHead  className="w-[150px] text-slate-500">Notes</TableHead>
+              <TableHead  className="w-[150px] text-slate-500">Delete</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
