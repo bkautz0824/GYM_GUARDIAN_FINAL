@@ -31,7 +31,7 @@ export function ModeToggle() {
   React.useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  console.log(theme)
+  // console.log(theme)
 
   
 

@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/popover"
 import { useSearchParams } from 'next/navigation'
 import TableRowComponent from '@/components/helpers/TableRowComponent'
+import { getExercises } from '@/api-requests/exercises-requests'
 
 export default function AreaOfFocus() {
 
@@ -42,6 +43,9 @@ export default function AreaOfFocus() {
 
   const [open, setOpen] = React.useState(false)
   const [state, setState] = React.useState([]);
+
+  const data = getExercises()
+  console.log(data)
 
 
   const handleValue = (selectedValue) => {

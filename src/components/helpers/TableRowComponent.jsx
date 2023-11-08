@@ -19,7 +19,7 @@ const TableRowComponent = ({
 }) => {
   return (
     <TableRow key={index} className="bg-secondary/80">
-      <TableCell className="font-medium font-extrabold">{name}</TableCell>
+      <TableCell className="font-medium">{name}</TableCell>
       <TableCell>
         <Input
           key={`reps_${index}`}
