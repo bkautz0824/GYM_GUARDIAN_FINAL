@@ -36,16 +36,39 @@ import TableRowComponent from '@/components/helpers/TableRowComponent'
 import { getExercises } from '@/api-requests/exercises-requests'
 
 export default function AreaOfFocus() {
-
-  const searchParams = useSearchParams()
-  const exercises = searchParams.getAll("exercises")
   const {area} = useParams()
 
   const [open, setOpen] = React.useState(false)
   const [state, setState] = React.useState([]);
+  const [isLoading, setLoading] = React.useState(true)
+  const [exercises, setExercises] = React.useState([]);
 
-  const data = getExercises()
-  console.log(data)
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/exercises?muscle_group=${area}`, {
+          method: "GET",
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+  
+        const res = await response.json();
+        // console.log(res.data[0].exercises);
+        setExercises(res.data[0].exercises); // Assuming the response structure contains the exercises directly
+  
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle the error, e.g., display an error message to the user
+      }
+    };
+  
+     fetchData(); 
+    
+
+  }, [area]);
+  console.log(exercises)
 
 
   const handleValue = (selectedValue) => {
@@ -110,11 +133,11 @@ export default function AreaOfFocus() {
                   <CommandItem
                     key={Math.random()}
                     onSelect={() => {
-                      handleValue(exercise)
+                      handleValue(exercise.name)
                       setOpen(false)
                     }}
                   >
-                    {exercise}
+                    {exercise.name}
                     <CheckIcon
                       className={cn(
                         "ml-auto h-4 w-4",

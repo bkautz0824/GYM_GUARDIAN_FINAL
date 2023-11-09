@@ -13,11 +13,12 @@ export default function Builder() {
 
 
   return (
-    <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover`}>
+    <>
+     <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover`}>
         <Card className="items-center bg-primary">
             <CardHeader>
-                  <TypographyH1 text={'Builder'}/>
-            <TypographyP text={"Use this page to start building your own workout!"}/>
+                <TypographyH1 text={'Builder'}/>
+                <TypographyP text={"Use this page to start building your own workout!"}/>
             </CardHeader>
           
         </Card>
@@ -35,9 +36,7 @@ export default function Builder() {
                          <Link 
                             href={{
                                 pathname: `builder/${item.muscle_group}`,
-                                query: {
-                                    exercises: item.exercises
-                                }
+                                
                             } }
                       
                             className={buttonVariants({ variant: "secondary" }) + "text-secondary"}
@@ -50,10 +49,17 @@ export default function Builder() {
             }
             </div>
         </CardContent>
-
- 
-
-      
     </Card>
+    <Card className="bg-slate-600">
+    
+            <CardHeader>
+                <TypographyH1 text={'Current Workout in Progress...'}/>
+                <TypographyP text={"Use this page to start building your own workout!"}/>
+            </CardHeader>
+          
+     
+    </Card> 
+    </>
+   
   )
 }
