@@ -1,4 +1,4 @@
-import clientPromise from "../../lib/mongodb";
+import {clientPromise} from "../../lib/mongodb";
 import _ from "lodash"
 
 export default async function handler(req, res) {
