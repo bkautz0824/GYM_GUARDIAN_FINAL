@@ -50,7 +50,7 @@ export default function Builder() {
             </div>
         </CardContent>
     </Card>
-    <Card className="bg-slate-600">
+    {/* <Card className="bg-slate-600">
     
             <CardHeader>
                 <TypographyH1 text={'Current Workout in Progress...'}/>
@@ -58,7 +58,7 @@ export default function Builder() {
             </CardHeader>
           
      
-    </Card> 
+    </Card>  */}
     </>
    
   )

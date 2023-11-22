@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
                 {/* <AvatarUse/> */}
               {/* <DropDown display={"Navigation"} label={"Select a page"} items={"Home"}/> */}
         
-    
+      
             {children} 
         </ThemeProvider>
           

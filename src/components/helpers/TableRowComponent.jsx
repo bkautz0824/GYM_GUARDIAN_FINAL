@@ -18,7 +18,7 @@ const TableRowComponent = ({
   handleDelete,
 }) => {
   return (
-    <TableRow key={index} className="bg-secondary/80">
+    <TableRow key={index} className="h-20 bg-secondary/80">
       <TableCell className="font-medium">{name}</TableCell>
       <TableCell>
         <Input
@@ -43,6 +43,7 @@ const TableRowComponent = ({
       </TableCell>
       <TableCell>
         <Input
+          className="text-sm"
           key={`notes_${index}`}
           type="text"
           placeholder="Notes"

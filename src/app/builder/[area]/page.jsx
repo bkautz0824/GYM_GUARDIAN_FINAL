@@ -67,7 +67,7 @@ export default function AreaOfFocus() {
      fetchData(); 
     
 
-  }, [area]);
+  }, []);
   console.log(exercises)
 
 
@@ -103,8 +103,9 @@ export default function AreaOfFocus() {
 
   
   return (
-    <Card className={`m-5 bg-primary shadow-xl shadow-white/50 text-primary`}>
-        <CardHeader className="items-center text-slate-500">
+    <div className="flex justify-center w-full h-full">
+      <Card className={`m-4 bg-primary text-primary shadow-slate-100 shadow-2xl`}>
+        <CardHeader className="items-center text-slate-800">
             
             <TypographyH1 text={area}/>
             <TypographyP text={"Use this page to start building your own workout!"}/>
@@ -117,7 +118,7 @@ export default function AreaOfFocus() {
               variant="secondary"
               role="combobox"
               aria-expanded={open}
-              className="w-[200px] justify-between mx-2 text-slate-500"
+              className="w-[200px] justify-between mx-2 text-slate-200"
             >
              
                 Select framework...
@@ -193,5 +194,6 @@ export default function AreaOfFocus() {
         Submit Set Data
       </Button> */}
     </Card>
+    </div>
   )
 }

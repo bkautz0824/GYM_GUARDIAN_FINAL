@@ -26,6 +26,7 @@ export function ModeToggle() {
     { name: 'Robin', theme: 'robin' },
     { name: 'Franky', theme: 'franky' },
     { name: 'Brook', theme: 'brook' },
+    { name: 'Default', theme: 'default' },
   ];
   // When mounted on client, now we can show the UI
   React.useEffect(() => setMounted(true), []);
