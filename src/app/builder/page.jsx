@@ -36,7 +36,9 @@ export default function Builder() {
                          <Link 
                             href={{
                                 pathname: `builder/${item.muscle_group}`,
-                                
+                                query: {
+                                    exercises: item.exercises
+                                }
                             } }
                       
                             className={buttonVariants({ variant: "secondary" }) + "text-secondary"}
