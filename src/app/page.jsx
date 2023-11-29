@@ -10,10 +10,12 @@ import {
   CardHeader,
 } from "@/components/ui/card"
 import { DotPattern } from '@/components/page-layouts/DotPattern'
+import { getServerSession } from "next-auth"
 
-export default function Home() {
 
+export default async function Home() {
 
+  const session = await getServerSession()
   return (
 
     <div className="relative flex items-start justify-center w-full h-screen overflow-hidden border rounded-2xl border-white/10 bg-white/5">

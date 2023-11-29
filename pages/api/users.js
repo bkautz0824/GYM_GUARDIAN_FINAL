@@ -1,11 +1,12 @@
 
 // Create a global client variable
-import {clientPromise} from "../../lib/mongodb";
+import {clientPromise} from "../../db/mongodb";
 import mongoose from "mongoose";
 // Create a global UserModel variable
 
 
 export default async function handler(req, res) {
+  console.log("here")
    // Reuse the client and UserModel variables
    const client = await clientPromise;
    const db = client.db("GYM-GUARDIAN");

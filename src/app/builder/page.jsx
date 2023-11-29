@@ -1,4 +1,3 @@
-
 import {
     Card,
     CardContent,
@@ -8,10 +7,17 @@ import {
 import { workouts } from '@/data/WorkoutData'
 import Link from 'next/link'
 import { buttonVariants } from "@/components/ui/button"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
-export default function Builder() {
-
-
+export default async function Builder() {
+    const session = await getServerSession()
+    
+    if(!session || !session.user){
+        redirect("/api/auth/signin")
+    }
+    console.log(session)
+    
   return (
     <>
      <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover`}>
