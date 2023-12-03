@@ -1,4 +1,4 @@
-import {clientPromise} from "@/lib/mongodb";
+import {clientPromise} from "../../db/mongodb";
 import _ from "lodash"
 import { ObjectId } from 'mongodb';
 
@@ -11,8 +11,10 @@ switch (req.method) {
 case "GET":
         const { id } = req.query; // Retrieve the muscle_group query parameter
         if (id) {
+          console.log("by id", id)
+          console.log(db.collection('Workouts'))
           // If a muscle_group parameter is provided, filter exercises by muscle_group
-          const exercises = await db.collection("Workouts").find({ id }).toArray();
+          const exercises = await db.collection("Workouts").findOne({ _id: String(id) });
           console.log(exercises)
           res.json({ status: 200, data: exercises });
         } else {
@@ -23,19 +25,30 @@ case "GET":
         break;
   
 case "POST":
-    let workoutData = req.body
-    if(!workoutData.date){
-      res.status(404).send({ message: 'User must fill out the date' });
+    // let workoutData = req.body
+    const existingWorkout = await db.collection('Workouts').findOne({ _id: req.body._id });
+
+    if (existingWorkout) {
+      res.status(409).json({ status: 409, error: 'Workout with the same ID already exists' });
     } else {
       // Process the status update
-      const id = new ObjectId()
-      workoutData.status = "Edit"
-      workoutData._id = id
+      const id = new ObjectId();
+      const workoutData = {
+        _id: String(id),
+        status: 'Edit',
+        date: new Date(),
+        length: req.body.length || '',
+        cals_burned: req.body.cals_burned || '',
+        mood: req.body.mood || '',
+        intensity: req.body.intensity || '',
+        exhaustion: req.body.exhaustion || '',
+        sleep: req.body.sleep || '',
+        user: req.body.user || '',
+        exercise_data: [],
+      };
 
-    await db.collection("Workouts").insertOne(workoutData);
-
-      res.json({status:200, data: workoutData, message: "Workout successfully created!"})
-
+      await db.collection('Workouts').insertOne(workoutData);
+      res.json({ status: 200, data: workoutData, message: 'Workout successfully created!' });
     }
     break;
 
@@ -46,7 +59,6 @@ case "PUT":
     let workoutEntry = await db.collection("Workouts").find({ id }).toArray();
 
     // await db.collection("Workouts").insertOne(userFields);
-
 
     break;
        
