@@ -17,7 +17,8 @@ case "GET":
           const exercises = await db.collection("Workouts").findOne({ _id: String(id) });
           console.log(exercises)
           res.json({ status: 200, data: exercises });
-        } else {
+        }
+        else {
           // If no muscle_group parameter is provided, retrieve all exercises
           const exercises = await db.collection("Workouts").find({}).toArray();
           res.json({ status: 200, data: exercises });
@@ -26,6 +27,7 @@ case "GET":
   
 case "POST":
     // let workoutData = req.body
+    console.log("Handling POST request");
     const existingWorkout = await db.collection('Workouts').findOne({ _id: req.body._id });
 
     if (existingWorkout) {

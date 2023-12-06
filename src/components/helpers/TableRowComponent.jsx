@@ -19,7 +19,7 @@ const TableRowComponent = ({
   handleDelete,
 }) => {
 
-  console.log(i)
+
   return (
     <TableRow key={i} className="h-20 bg-secondary/80">
       <TableCell className="font-medium">{name}</TableCell>

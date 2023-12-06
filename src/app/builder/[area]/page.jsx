@@ -40,7 +40,6 @@ import exercisesData from '@/data/GYM-GUARDIAN.Exercises'
 export default function AreaOfFocus() {
   const {area} = useParams()
 
-
   const [exercisesState, setExerciseState] = React.useState({
     exercises: [],
 
@@ -94,25 +93,40 @@ export default function AreaOfFocus() {
 
   const handleValue = (selectedValue) => {
     console.log(selectedValue);
+    const stateCopy = [...state]; // Assuming state is an object with an array property
 
+    const existingItemIndex = stateCopy.findIndex((item) => item.name === selectedValue.name);
+
+    if (existingItemIndex !== -1) {
+      // If the item exists, update the data array
+      stateCopy[existingItemIndex] = {
+        ...stateCopy[existingItemIndex],
+        data: [
+          ...stateCopy[existingItemIndex].data,
+          {
+            profile: selectedValue.profile,
+            reps: 0,
+            weight: 0,
+            notes: "",
+          },
+        ],
+      };
+    } else {
+      // If the item doesn't exist, add a new entry to the state array
+      stateCopy.push({
+        name: selectedValue.name,
+        data: [
+          {
+            profile: selectedValue.profile,
+            reps: 0,
+            weight: 0,
+            notes: "",
+          },
+        ],
+      });
+    }
     
-    setState((prevState) => {
-      console.log(prevState)
-      return [
-        ...prevState,
-        {
-          name: selectedValue.name,
-          data: [
-            {
-              profile: selectedValue.profile,
-              reps: 0,
-              weight: 0,
-              notes: "",
-            },
-          ],
-        },
-      ];
-    });
+    setState(stateCopy)
   };
   
 
@@ -134,7 +148,7 @@ export default function AreaOfFocus() {
     });
   };
 
-  console.log(state)
+  // console.log(state)
   
 
   
@@ -203,7 +217,7 @@ export default function AreaOfFocus() {
           <TableBody>
           {
             state.map((item, i) => {
-              console.log(item.data)
+              // console.log(item.data)
 
               return(
               <TableRowComponent
