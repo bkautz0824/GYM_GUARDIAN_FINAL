@@ -92,7 +92,7 @@ export default function AreaOfFocus() {
 
 
   const handleValue = (selectedValue) => {
-    console.log(selectedValue);
+
     const stateCopy = [...state]; // Assuming state is an object with an array property
 
     const existingItemIndex = stateCopy.findIndex((item) => item.name === selectedValue.name);
@@ -130,25 +130,37 @@ export default function AreaOfFocus() {
   };
   
 
-  const handleDelete = (index) => {
-    const newValue = state.filter((item, i) => i !== index);
-    setState(newValue);
+  const handleDelete = (index, i, name) => {
+    console.log(index, i)
+    setState((prevState) =>{
+      const updatedData = prevState[index].data.filter((item, currentIndex) => currentIndex !== i);
+      return [
+        ...prevState.slice(0, index),
+        {
+          name: name,
+          data: updatedData,
+        },
+        ...prevState.slice(index + 1),
+      ];
+    
+      })
+    
   };
   
 
-  const handleChange = (rowIndex, key, value) => {
-    console.log(state)
+  const handleChange = (rowIndex, key, value, dataRowIndex) => {
+    console.log(rowIndex, dataRowIndex)
     setState((prevState) => {
       // Create a copy of the state
       const updatedState = [...prevState];
-
-      updatedState[rowIndex].data[0][key] = value;
+      console.log( updatedState[rowIndex].data)
+      updatedState[rowIndex].data[dataRowIndex][key] = value;
   
       return updatedState;
     });
   };
 
-  // console.log(state)
+  console.log(state)
   
 
   
@@ -211,27 +223,24 @@ export default function AreaOfFocus() {
               <TableHead className="w-[150px] text-slate-500">Reps</TableHead>
               <TableHead className="w-[150px] text-slate-500">Weight</TableHead>
               <TableHead className="w-[150px] text-slate-500">Notes</TableHead>
-              <TableHead className="w-[150px] text-slate-500">Delete</TableHead>
+              <TableHead className="w-[150px] text-slate-500">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
           {
-            state.map((item, i) => {
-              // console.log(item.data)
+            state ? state.map((item, i) => {
+             
 
               return(
               <TableRowComponent
                 key={i}
-                profile={item.data.profile}
+                data={item.data}
                 name={item.name}
-                reps={item.data.reps}
-                weight={item.data.weight}
-                notes={item.data.notes}
-                i={i}
+                index={i}
                 handleChange={handleChange}
                 handleDelete={handleDelete}
               />)
-            })
+            }) : null
           }
            
           </TableBody>
