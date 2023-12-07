@@ -56,12 +56,23 @@ case "POST":
 
 case "PUT": 
     let data = req.body
-    const {workoutId, exercises} = data
+    console.log(data)
+    let workoutEntry = await db.collection('Workouts').findOne({ _id: data.id });
 
-    let workoutEntry = await db.collection("Workouts").find({ id }).toArray();
-
+    if (!workoutEntry) {
+      return res.status(404).json({ status: 404, message: 'Workout not found!' });
+    }
+    
+    data.data.map((entry, i)=> {
+      console.log(entry)
+      console.log(data.data)
+      if(entry)
+      workoutEntry.exercise_data.push(entry)
+    })
+    // const result = await db.collection('Workouts').updateOne({ _id: data.id }, { $set: { exercise_data: workoutEntry.exercise_data } });
+    // console.log(result)
     // await db.collection("Workouts").insertOne(userFields);
-
+    res.json({ status: 200, data: workoutEntry, message: 'Exercise Information successfully created!' });
     break;
        
     }

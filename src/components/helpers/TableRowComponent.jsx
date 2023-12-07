@@ -18,16 +18,29 @@ const TableRowComponent = ({
 }) => {
 console.log(name, data)
 
+  const [display, setDisplay] = React.useState(true)
+
+  
+
   return (
     <>
     {
     data ?
-    <TableRow className="justify-center h-20 bg-secondary">
-      <TableCell colSpan={5}>
-        {name + ` x ${data.length}`}
+    <TableRow className="justify-center h-10 bg-secondary">
+      <TableCell colSpan={5} >
+        <p className="text-lg hover:text-white">
+          {name + ` x ${data.length}`}
+        </p>
+        
       </TableCell>
       <TableCell className="justify-end">
-        <ChevronDownIcon />
+        <Button variant='link'>
+        {
+          display ? <ChevronDownIcon className="w-10 h-7" onClick={() => setDisplay(false)}/> :
+          <ChevronUpIcon className="w-10 h-7" onClick={() => setDisplay(true)}/>
+        }   
+        </Button>
+       
       </TableCell>
     </TableRow> : null
     }
@@ -37,10 +50,10 @@ console.log(name, data)
 
 
       return(
-      <TableRow key={i} className="h-10 bg-secondary/80">
+      <TableRow key={i} className={`h-10 bg-secondary/80 ${display ? '' : 'hidden'}`} id={`${name}_${i}_cell`}>
         <TableCell className="font-medium">{name}</TableCell>
         <TableCell className="font-medium">{item.profile}</TableCell>
-        <TableCell>
+        <TableCell >
           <Input
             key={`reps_${i}`}
             value={item.reps}

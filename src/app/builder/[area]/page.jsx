@@ -34,6 +34,7 @@ import {
 import { useSearchParams } from 'next/navigation'
 import TableRowComponent from '@/components/helpers/TableRowComponent'
 import exercisesData from '@/data/GYM-GUARDIAN.Exercises'
+import { useBuilderContext } from '@/context/exercise-context'
 
 // import { getExercises } from '@/api-requests/exercises-requests'
 
@@ -42,8 +43,9 @@ export default function AreaOfFocus() {
 
   const [exercisesState, setExerciseState] = React.useState({
     exercises: [],
-
   })
+
+  const { workoutId, setWorkoutId } = useBuilderContext()
   const [open, setOpen] = React.useState(false)
   const [state, setState] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true)
@@ -131,7 +133,7 @@ export default function AreaOfFocus() {
   
 
   const handleDelete = (index, i, name) => {
-    console.log(index, i)
+    
     setState((prevState) =>{
       const updatedData = prevState[index].data.filter((item, currentIndex) => currentIndex !== i);
       return [
@@ -149,7 +151,7 @@ export default function AreaOfFocus() {
   
 
   const handleChange = (rowIndex, key, value, dataRowIndex) => {
-    console.log(rowIndex, dataRowIndex)
+    
     setState((prevState) => {
       // Create a copy of the state
       const updatedState = [...prevState];
@@ -160,17 +162,55 @@ export default function AreaOfFocus() {
     });
   };
 
-  console.log(state)
+  const updateExerciseData = (data) => {
+    console.log(workoutId, data)
+    const submitData = async () => {
+      try{
+        const response = await fetch(`http://localhost:3000/api/workout`,
+        {
+          method: "PUT",
+          headers: {
+              'Content-Type': 'application/json',
+              // Add any additional headers if needed
+            },
+          body: JSON.stringify({
+            id: workoutId,
+            data: data
+          })
+        }
+
+        )
+        if (response.ok) {
+          const data = await response.json();
+          
+          console.log(data.data);
+        } else {
+          console.error("Error:", response.status, response.statusText);
+        }
+      }
+      catch(error){
+        console.error("Error")
+      }
+    }
+    submitData()
+    
+  }
   
 
   
   return (
-    <div className="flex justify-center w-full h-full">
-      <Card className={`m-4 bg-primary text-primary shadow-slate-100 shadow-2xl`}>
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      <Card className={`m-4 bg-primary text-primary shadow-slate-100 shadow-2xl w-3/4`}>
         <CardHeader className="items-center text-slate-800">
-            
             <TypographyH1 text={area}/>
             <TypographyP text={"Use this page to start building your own workout! If the exercise is not weighted, just put your body weight."}/>
+
+            <Button
+              className={"bg-secondary rounded-md"}
+              onClick={() => updateExerciseData(state)}
+            >
+              Submit Data to Workout
+            </Button>
         </CardHeader>
         <CardContent>
 
@@ -249,15 +289,13 @@ export default function AreaOfFocus() {
         null
       }
         </CardContent>
-
-      {/* <Button
       
-        className={"bg-primary"}
-        onClick={() => console.log(value)}
-      >
-        Submit Set Data
-      </Button> */}
+     
     </Card>
+
+    <div>
+     
+      </div>
     </div>
   )
 }
