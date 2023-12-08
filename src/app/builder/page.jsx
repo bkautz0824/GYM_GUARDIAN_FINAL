@@ -60,7 +60,7 @@ export default async function Builder() {
             </div>
         </CardContent>
     </Card>
-    <UserWorkout sessionData={session.user} />
+    <UserWorkout sessionData={session} />
     </>
    
   )

@@ -9,7 +9,8 @@ export default async function handler(req, res) {
 switch (req.method) {
      
 case "GET":
-        const { id } = req.query; // Retrieve the muscle_group query parameter
+        const { id } = req.query;
+         // Retrieve the muscle_group query parameter
         if (id) {
           console.log("by id", id)
           console.log(db.collection('Workouts'))
@@ -56,21 +57,28 @@ case "POST":
 
 case "PUT": 
     let data = req.body
-    console.log(data)
     let workoutEntry = await db.collection('Workouts').findOne({ _id: data.id });
 
     if (!workoutEntry) {
       return res.status(404).json({ status: 404, message: 'Workout not found!' });
     }
-    
+   
+    const currentData = workoutEntry.exercise_data
     data.data.map((entry, i)=> {
-      console.log(entry)
-      console.log(data.data)
-      if(entry)
-      workoutEntry.exercise_data.push(entry)
+      let matchingIndex = currentData.findIndex((item) => item.name === entry.name);
+
+      if (matchingIndex !== -1) {
+        // If matching object found, update it
+        entry.data.map((exercise, i) => {
+          currentData[matchingIndex].data.push(entry.data[i]);
+        })
+      } else {
+        currentData.push(entry);
+      }
     })
-    // const result = await db.collection('Workouts').updateOne({ _id: data.id }, { $set: { exercise_data: workoutEntry.exercise_data } });
-    // console.log(result)
+
+    db.collection('Workouts').updateOne({ _id: data.id }, { $set: { exercise_data: workoutEntry.exercise_data } });
+   
     // await db.collection("Workouts").insertOne(userFields);
     res.json({ status: 200, data: workoutEntry, message: 'Exercise Information successfully created!' });
     break;

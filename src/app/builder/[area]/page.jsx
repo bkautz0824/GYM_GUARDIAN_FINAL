@@ -46,15 +46,14 @@ export default function AreaOfFocus() {
   })
 
   const { workoutId, setWorkoutId } = useBuilderContext()
+  console.log(workoutId)
   const [open, setOpen] = React.useState(false)
   const [state, setState] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
     return () => {
-      
       let activeGroup = exercisesData.filter((item) => item.muscle_group === area)
-      console.log(activeGroup[0])
       
       setExerciseState({
         ...exercisesState,
@@ -70,11 +69,9 @@ export default function AreaOfFocus() {
   //       const response = await fetch(`http://localhost:3000/api/exercises?muscle_group=${area}`, {
   //         method: "GET",
   //       });
-  
   //       if (!response.ok) {
   //         throw new Error(`Request failed with status: ${response.status}`);
   //       }
-  
   //       const res = await response.json();
   //       // console.log(res.data[0].exercises);
   //       setExercises(res.data[0].exercises); // Assuming the response structure contains the exercises directly
@@ -84,12 +81,8 @@ export default function AreaOfFocus() {
   //       // Handle the error, e.g., display an error message to the user
   //     }
   //   };
-  
   //    fetchData(); 
-    
-
   // }, []);
-  // console.log(exercises)
 
 
 
@@ -117,6 +110,7 @@ export default function AreaOfFocus() {
       // If the item doesn't exist, add a new entry to the state array
       stateCopy.push({
         name: selectedValue.name,
+        area: area,
         data: [
           {
             profile: selectedValue.profile,
@@ -164,35 +158,41 @@ export default function AreaOfFocus() {
 
   const updateExerciseData = (data) => {
     console.log(workoutId, data)
-    const submitData = async () => {
-      try{
-        const response = await fetch(`http://localhost:3000/api/workout`,
-        {
-          method: "PUT",
-          headers: {
-              'Content-Type': 'application/json',
-              // Add any additional headers if needed
-            },
-          body: JSON.stringify({
-            id: workoutId,
-            data: data
-          })
+    if(data.length < 1){
+      alert("You have not entered any data!")
+    }else{
+      const submitData = async () => {
+        try{
+          const response = await fetch(`http://localhost:3000/api/workout`,
+          {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any additional headers if needed
+              },
+            body: JSON.stringify({
+              id: workoutId,
+              data: data
+            })
+          }
+  
+          )
+          if (response.ok) {
+            const data = await response.json();
+            
+            console.log(data.data);
+          } else {
+            console.error("Error:", response.status, response.statusText);
+          }
         }
+        catch(error){
+          console.error("Error")
+        }
+      }
+      submitData()
 
-        )
-        if (response.ok) {
-          const data = await response.json();
-          
-          console.log(data.data);
-        } else {
-          console.error("Error:", response.status, response.statusText);
-        }
-      }
-      catch(error){
-        console.error("Error")
-      }
     }
-    submitData()
+   
     
   }
   

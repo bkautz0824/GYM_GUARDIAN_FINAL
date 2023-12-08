@@ -25,7 +25,7 @@ console.log(name, data)
   return (
     <>
     {
-    data ?
+    data.length > 0 ?
     <TableRow className="justify-center h-10 bg-secondary">
       <TableCell colSpan={5} >
         <p className="text-lg hover:text-white">
