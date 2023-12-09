@@ -179,8 +179,9 @@ export default function AreaOfFocus() {
           )
           if (response.ok) {
             const data = await response.json();
-            
-            console.log(data.data);
+            alert(data.message)
+            setState([])
+            console.log(data)
           } else {
             console.error("Error:", response.status, response.statusText);
           }

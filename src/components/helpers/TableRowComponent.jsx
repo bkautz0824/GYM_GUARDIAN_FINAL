@@ -18,7 +18,7 @@ const TableRowComponent = ({
 }) => {
 console.log(name, data)
 
-  const [display, setDisplay] = React.useState(true)
+const [display, setDisplay] = React.useState(true)
 
   
 

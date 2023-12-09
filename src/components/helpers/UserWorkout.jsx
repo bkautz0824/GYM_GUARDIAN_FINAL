@@ -8,11 +8,12 @@ import {
   import { TypographyH1, TypographyMuted, TypographyP, TypographyH3 } from '@/components/typography/Typography'
 import { useBuilderContext } from '@/context/exercise-context'
 import WorkoutDisplay from './UserWorkout/WorkoutDisplay'
+import WorkoutAreasDisplay from './UserWorkout/WorkoutAreasDisplay'
 
 export default function UserWorkout({sessionData}) {
     const {user} = sessionData
     const { workoutId, setWorkoutId } = useBuilderContext()
-    const [workout, setWorkout] = useState()
+    const [workout, setWorkout] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
@@ -82,8 +83,9 @@ export default function UserWorkout({sessionData}) {
                 <TypographyH1 text={user.name}/>
                 <TypographyP text={"This section will track your workout as you build it!"}/>
 
-            </CardHeader>
-            <WorkoutDisplay workout={workout} />
+          </CardHeader>
+          <WorkoutDisplay workout={workout}/>
+          <WorkoutAreasDisplay workoutData={workout.exercise_data}/>
         </CardContent>
     </Card>
     </>
