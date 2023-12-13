@@ -1,4 +1,4 @@
-import React from 'react'
+import {useMemo, useState, useEffect} from 'react'
 import {
     Card,
     CardContent,
@@ -14,41 +14,140 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
-  import TableRowComponent from '../TableRowComponent'
-  import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
+import { Button } from '@/components/ui/button'
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import WorkoutAreaHelper from './WorkoutAreas/WorkoutAreaHelper'
 
-export default function WorkoutAreasDisplay({workoutData}) {
+export default function WorkoutAreasDisplay({workoutData, workoutId}) {
+  let [workoutState, setWorkoutState] = useState([])
+  let [editState, setEditState] = useState([])
 
-    const [display, setDisplay] = React.useState(true)
+ useEffect(() => {
+    // Initialize edit states array with `false` for each item in workoutData
+    setWorkoutState(workoutData)
+    workoutData ? 
+    setEditState(Array(workoutData.length).fill(false)) : null
+  }, [workoutData]);
+
+  
+
+  const setEditMode = (index, value) => {
+    
+    const newEditStates = [...editState];
+    
+    if(value === true){
+      alert("You may now edit.")
+      newEditStates[index] = value;
+    }else if(value === "cancel"){
+      alert("Your changes have been reverted")
+      setWorkoutState(workoutData)
+    }
+    else{
+      newEditStates[index] = value;
+      handleSaveChanges(index)
+    }
+    setEditState(newEditStates);
+  };
+
+  const handleInputChange = (parentIndex, newData) => {
+    console.log(newData)
+    setWorkoutState((prev) => {
+      return prev.map((item, index) => {
+        if (index === parentIndex) {
+          console.log(newData)
+          // If it's the target parentIndex, replace the 'data' key with the new data
+          return { ...item, data: newData };
+        }
+        return item;
+      });
+    });
+  };
+  
+  console.log(workoutData, workoutState)
+  const handleSaveChanges = async (index) => {
+    const confirmed = window.confirm("Are you sure you want to save these changes and overwrite previous data?");
+    
+    if (!confirmed) {
+      setWorkoutState(workoutData)
+      return;
+    }
+    console.log(workoutState)
+    try {
+      console.log(workoutState)
+      const response = await fetch(`http://localhost:3000/api/entryUpdate`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          // Add any additional headers if needed
+        },
+        body: JSON.stringify({
+          _id: workoutId,  // Replace with the actual value you want to send
+          updateData: workoutState[index],
+        }),
+      });
+  
+      if (response.ok) {
+        const responseData = await response.json();
+        alert(responseData.message);
+        setWorkoutState(responseData.data);
+     
+      } else {
+        console.error("Error:", response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+  
+
   return (
     <div>
-    <>
-       {
-       workoutData ? workoutData.map((item, ) => {
-          console.log(item)
-          return (
-            <Card className="flex flex-wrap p-4 m-2" >
-            
-              <p>
-                {item.name} x{item.data.length}
-              </p>
-              <Table>
-              <TableRow >
-                <TableHead className="w-[150px] text-slate-500">Muscle Profile</TableHead>
-                <TableHead className="w-[150px] text-slate-500">Reps</TableHead>
-                <TableHead className="w-[150px] text-slate-500">Weight</TableHead>
-                <TableHead className="w-[150px] text-slate-500">Notes</TableHead>
-                <TableHead className="w-[150px] text-slate-500">Action</TableHead>
-                </TableRow>
-              <WorkoutAreaHelper data={item.data}/>
-              </Table>
-            </Card>
-          )
-        }) : null
-       }
+      {
+      workoutState ? workoutState.map((item, i) => {
         
-      </>
+        return (
+          <Card key={item.name + i} className="p-4 m-2" >
+              <div className='flex justify-between'>
+              <div className='flex items-center'>
+                <h3 className='mr-5 text-2xl'>
+                  {item.area}
+                </h3>
+                <p>{item.name + " x " + item.data.length}</p>
+              </div>
+              <div>
+                <Button 
+                  className="shadow-sm bg-primary shadow-inherit" 
+                  variant="ghost" 
+                  onClick={() => setEditMode(i, !editState[i])}>
+                  {editState[i] ? 'Save' : 'Edit'}
+                </Button>
+                {
+                  editState[i] ? 
+                  <Button 
+                    className="ml-2 shadow-sm bg-secondary shadow-inherit" 
+                    variant="ghost" 
+                    onClick={() => setEditMode(i, "cancel")}>
+                    Cancel
+                  </Button> : null
+                }
+              </div>
+              </div> 
+            <Table>
+              <TableRow >
+                <TableCell className="w-[150px] text-slate-500">Muscle Profile</TableCell>
+                <TableCell className="w-[150px] text-slate-500">Reps</TableCell>
+                <TableCell className="w-[150px] text-slate-500">Weight</TableCell>
+                <TableCell className="w-[200px] text-slate-500">Notes</TableCell>
+                {editState[i] && <TableHead className="w-[90px] text-slate-500">Delete</TableHead>}
+              </TableRow>
+              <WorkoutAreaHelper data={item.data} editMode={editState[i]} parentIndex={i} handleInputChange={handleInputChange}/>
+            </Table>
+          </Card>
+          )
+        }) : 
+        (<p>No workout data available</p>)
+       }
+
     </div>
   )
 }

@@ -59,6 +59,11 @@ export default async function Builder() {
             }
             </div>
         </CardContent>
+        {/* <Card>
+            <Link href={"builder/current_workout"} className={buttonVariants({ variant: "secondary" }) + "text-secondary"}>
+                Current Workout
+            </Link>
+        </Card> */}
     </Card>
     <UserWorkout sessionData={session} />
     </>

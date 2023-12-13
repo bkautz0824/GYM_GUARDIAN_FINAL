@@ -38,15 +38,55 @@ case "POST":
       const id = new ObjectId();
       const workoutData = {
         _id: String(id),
-        status: 'Edit',
-        date: new Date(),
-        length: req.body.length || '',
-        cals_burned: req.body.cals_burned || '',
-        mood: req.body.mood || '',
-        intensity: req.body.intensity || '',
-        exhaustion: req.body.exhaustion || '',
-        sleep: req.body.sleep || '',
-        user: req.body.user || '',
+        status:  req.body.status || "Edit",
+        date: {
+          value: new Date(),
+          label: 'Date'
+        },
+        length: {
+          value: req.body.length || '',
+          label: 'Length',
+          description: "How long did the workout take in minutes?"
+        },
+        cals_burned: {
+          value: req.body.cals_burned || '',
+          label: 'Calories Burned',
+          description: "Input the data gathered from a fitness watch or other device on how many calories were burned."
+        },
+        moodBefore: {
+          value: req.body.moodBefore || '',
+          label: 'Mood Before',
+          description: "Describe what your mood was like before this workout on a scale from 1 - 10 (10 being best)."
+        },
+        moodDuring: {
+          value: req.body.moodDuring || '',
+          label: 'Mood During',
+          description: "Describe what your mood was like during this workout on a scale from 1 - 10 (10 being best)."
+        },
+        moodAfter: {
+          value: req.body.moodAfter || '',
+          label: 'Mood After',
+          description: "Describe what your mood was like after this workout on a scale from 1 - 10 (10 being best)."
+        },
+        intensity: {
+          value: req.body.intensity || '',
+          label: 'Intensity',
+          description: "On a scale from 1-10, how intense was this workout?"
+        },
+        exhaustion: {
+          value: req.body.exhaustion || '',
+          label: 'Exhaustion',
+          description: "On a scale from 1-10, how exhausted were you after this workout?"
+        },
+        sleep: {
+          value: req.body.sleep || '',
+          label: 'Sleep',
+          description: "How many hours of sleep did you get the night before this workout?"
+        },
+        user: {
+          value: req.body.user || '',
+          label: 'User'
+        },
         exercise_data: [],
       };
 

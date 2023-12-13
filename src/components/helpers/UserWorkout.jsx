@@ -85,7 +85,7 @@ export default function UserWorkout({sessionData}) {
 
           </CardHeader>
           <WorkoutDisplay workout={workout}/>
-          <WorkoutAreasDisplay workoutData={workout.exercise_data}/>
+          <WorkoutAreasDisplay workoutData={workout.exercise_data} workoutId={workoutId}/>
         </CardContent>
     </Card>
     </>
