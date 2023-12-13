@@ -62,8 +62,17 @@ export default function WorkoutAreasDisplay({workoutData, workoutId}) {
       });
     });
   };
-  
-  console.log(workoutData, workoutState)
+
+  const handleRowDelete = (parentIndex, index) => {
+    const updatedWorkoutState = [...workoutState];
+    
+    updatedWorkoutState[parentIndex].data = updatedWorkoutState[parentIndex].data.filter((item, i) => i !== index);
+    if(updatedWorkoutState[parentIndex].data.length === 0){
+      updatedWorkoutState.splice(parentIndex, 1);
+    }
+    setWorkoutState(updatedWorkoutState);
+  }
+
   const handleSaveChanges = async (index) => {
     const confirmed = window.confirm("Are you sure you want to save these changes and overwrite previous data?");
     
@@ -71,9 +80,9 @@ export default function WorkoutAreasDisplay({workoutData, workoutId}) {
       setWorkoutState(workoutData)
       return;
     }
-    console.log(workoutState)
+
     try {
-      console.log(workoutState)
+
       const response = await fetch(`http://localhost:3000/api/entryUpdate`, {
         method: "POST",
         headers: {
@@ -140,7 +149,14 @@ export default function WorkoutAreasDisplay({workoutData, workoutId}) {
                 <TableCell className="w-[200px] text-slate-500">Notes</TableCell>
                 {editState[i] && <TableHead className="w-[90px] text-slate-500">Delete</TableHead>}
               </TableRow>
-              <WorkoutAreaHelper data={item.data} editMode={editState[i]} parentIndex={i} handleInputChange={handleInputChange}/>
+              <WorkoutAreaHelper 
+                data={item.data} 
+                editMode={editState[i]}
+                parentIndex={i} 
+                handleInputChange={handleInputChange}
+                workoutId={workoutId}
+                handleRowDelete={handleRowDelete}
+              />
             </Table>
           </Card>
           )

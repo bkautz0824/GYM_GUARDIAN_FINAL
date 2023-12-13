@@ -11,7 +11,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
-export default function WorkoutAreaHelper({data, parentIndex, editMode, handleInputChange}) {
+export default function WorkoutAreaHelper({data, parentIndex, editMode, handleInputChange, workoutId, handleRowDelete}) {
 
   // let [entryState, setEntryState] = React.useState(data)
   
@@ -26,14 +26,48 @@ export default function WorkoutAreaHelper({data, parentIndex, editMode, handleIn
         ...data.slice(index + 1),
       ];
   
-      console.log(updatedState);
   
-      // Assuming parentIndex is defined elsewhere in your code
       handleInputChange(parentIndex, updatedState);
   
       return updatedState;
   
   };
+
+  const handleDelete = async (index) => {
+    const confirmed = window.confirm("Are you sure you want to delete this set?");
+
+    if(!confirmed){
+      return
+    }else{
+      handleRowDelete(parentIndex, index)
+      try {
+        console.log(workoutId, index, parentIndex)
+        const response = await fetch(`http://localhost:3000/api/entryUpdate`, {
+          method: "DELETE",
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any additional headers if needed
+          },
+          body: JSON.stringify({
+            _id: workoutId,  // Replace with the actual value you want to send
+            index: index,
+            parentIndex: parentIndex,
+            method: "delete row",
+          }),
+        });
+    
+        if (response.ok) {
+          const responseData = await response.json();
+          alert(responseData.message);
+       
+        } else {
+          console.error("Error:", response.status, response.statusText);
+        }
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    }
+  }
 
 
 
@@ -91,7 +125,7 @@ export default function WorkoutAreaHelper({data, parentIndex, editMode, handleIn
         {
           editMode ? 
           <TableCell className="flex justify-center">
-            <Button>X</Button>
+            <Button onClick={(() => handleDelete(i))}>X</Button>
           </TableCell>
           : null
         }

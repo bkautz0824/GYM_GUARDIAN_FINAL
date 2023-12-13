@@ -15,13 +15,8 @@ export default async function handler(req, res) {
               }
         
             const currentData = existingWorkout.exercise_data
-            console.log(data)
             
             let matchingIndex = currentData.findIndex((item) => item.name === data.name);
-            console.log(matchingIndex)
-            currentData.map((item) => {
-                console.log(item.name)
-            })
             if(matchingIndex > -1){
                 currentData[matchingIndex] = data
             }
@@ -32,6 +27,31 @@ export default async function handler(req, res) {
         break;
 
         case "DELETE":
+            const index = req.body.index
+            const parentIndex = req.body.parentIndex
+            const workout = await db.collection('Workouts').findOne({ _id: req.body._id });
+            if (!workout) {
+                return res.status(404).json({ status: 404, message: 'Workout not found!' });
+              }
+            
+            const exerciseData = workout.exercise_data
+
+            exerciseData[parentIndex].data = exerciseData[parentIndex].data.filter((item, i) => i !== index);
+
+            if (exerciseData[parentIndex].data.length === 0) {
+                exerciseData.splice(parentIndex, 1);
+            }
+            // Update the workout object with the modified exerciseData
+            workout.exercise_data = exerciseData;
+            console.log(exerciseData)
+            // Now update the document in the database
+            await db.collection('Workouts').updateOne(
+                { _id: req.body._id },
+                { $set: { exercise_data: exerciseData } }
+            );
+        
+            // Respond with success message or other relevant data
+            res.json({ status: 200, message: 'Entry deleted successfully.' });
 
         break
     }
