@@ -84,7 +84,7 @@ export default function UserWorkout({sessionData}) {
                 <TypographyP text={"This section will track your workout as you build it!"}/>
 
           </CardHeader>
-          <WorkoutDisplay workout={workout}/>
+          <WorkoutDisplay workout={workout} workoutId={workoutId}/>
           <WorkoutAreasDisplay workoutData={workout.exercise_data} workoutId={workoutId}/>
         </CardContent>
     </Card>

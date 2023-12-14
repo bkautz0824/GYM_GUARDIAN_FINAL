@@ -31,18 +31,25 @@ case "POST":
     console.log("Handling POST request");
     const existingWorkout = await db.collection('Workouts').findOne({ _id: req.body._id });
 
+    if(!req.body.user){
+      res.status(400).json({error: "User must be logged in to create a new workout"})
+    }
+
     if (existingWorkout) {
       res.status(409).json({ status: 409, error: 'Workout with the same ID already exists' });
     } else {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth(); // Note: Months are 0-indexed, so this returns the current month
+      const day = today.getDate();
+
+      const customDate = new Date(year, month, day);
       // Process the status update
       const id = new ObjectId();
       const workoutData = {
         _id: String(id),
         status:  req.body.status || "Edit",
-        date: {
-          value: new Date(),
-          label: 'Date'
-        },
+        date: req.body.date || customDate,
         length: {
           value: req.body.length || '',
           label: 'Length',
@@ -83,10 +90,7 @@ case "POST":
           label: 'Sleep',
           description: "How many hours of sleep did you get the night before this workout?"
         },
-        user: {
-          value: req.body.user || '',
-          label: 'User'
-        },
+        user: req.body.user,
         exercise_data: [],
       };
 
