@@ -18,17 +18,17 @@ import { Button } from '@/components/ui/button'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import WorkoutAreaHelper from './WorkoutAreas/WorkoutAreaHelper'
 
-export default function WorkoutAreasDisplay({workoutData, workoutId}) {
+export default function WorkoutAreasDisplay({workoutData, workoutId, updateState}) {
   let [workoutState, setWorkoutState] = useState([])
   let [editState, setEditState] = useState([])
 
  useEffect(() => {
     // Initialize edit states array with `false` for each item in workoutData
-    setWorkoutState(workoutData)
+    workoutData ? setWorkoutState(workoutData) : null
     workoutData ? 
     setEditState(Array(workoutData.length).fill(false)) : null
   }, [workoutData]);
-
+console.log(workoutState)
   
 
   const setEditMode = (index, value) => {
@@ -44,8 +44,11 @@ export default function WorkoutAreasDisplay({workoutData, workoutId}) {
     }
     else{
       newEditStates[index] = value;
+      console.log(workoutState, value)
+      updateState(workoutState)
       handleSaveChanges(index)
     }
+    
     setEditState(newEditStates);
   };
 
@@ -54,23 +57,28 @@ export default function WorkoutAreasDisplay({workoutData, workoutId}) {
     setWorkoutState((prev) => {
       return prev.map((item, index) => {
         if (index === parentIndex) {
-          console.log(newData)
           // If it's the target parentIndex, replace the 'data' key with the new data
           return { ...item, data: newData };
         }
         return item;
       });
     });
+
   };
 
-  const handleRowDelete = (parentIndex, index) => {
+  function handleRowDelete (parentIndex, index) {
     const updatedWorkoutState = [...workoutState];
     
     updatedWorkoutState[parentIndex].data = updatedWorkoutState[parentIndex].data.filter((item, i) => i !== index);
     if(updatedWorkoutState[parentIndex].data.length === 0){
       updatedWorkoutState.splice(parentIndex, 1);
+      setEditState([])
     }
-    setWorkoutState(updatedWorkoutState);
+      updateState(updatedWorkoutState)
+      setWorkoutState(updatedWorkoutState);
+    
+    
+    
   }
 
   const handleSaveChanges = async (index) => {
@@ -112,7 +120,7 @@ export default function WorkoutAreasDisplay({workoutData, workoutId}) {
   return (
     <div>
       {
-      workoutState ? workoutState.map((item, i) => {
+      workoutState.length > 0 ? workoutState.map((item, i) => {
         
         return (
           <Card key={item.name + i} className="p-4 m-2" >
@@ -161,7 +169,14 @@ export default function WorkoutAreasDisplay({workoutData, workoutId}) {
           </Card>
           )
         }) : 
-        (<p>No workout data available</p>)
+
+        (
+        <Card className="flex flex-col justify-start p-4">
+          <TypographyP text="Click on a body area to add exercise/set entries to this workout!"/>
+          <TypographyMuted text="No workout data available"/>
+        </Card>
+        
+        )
        }
 
     </div>

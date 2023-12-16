@@ -41,7 +41,6 @@ export default function WorkoutAreaHelper({data, parentIndex, editMode, handleIn
     }else{
       handleRowDelete(parentIndex, index)
       try {
-        console.log(workoutId, index, parentIndex)
         const response = await fetch(`http://localhost:3000/api/entryUpdate`, {
           method: "DELETE",
           headers: {

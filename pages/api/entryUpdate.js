@@ -51,7 +51,7 @@ export default async function handler(req, res) {
             );
         
             // Respond with success message or other relevant data
-            res.json({ status: 200, message: 'Entry deleted successfully.' });
+            res.json({ status: 200, message: 'Entry deleted successfully.'});
 
         break
     }

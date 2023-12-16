@@ -9,16 +9,50 @@ import {
 import { useBuilderContext } from '@/context/exercise-context'
 import WorkoutDisplay from './UserWorkout/WorkoutDisplay'
 import WorkoutAreasDisplay from './UserWorkout/WorkoutAreasDisplay'
+import CrudWorkout from './UserWorkout/CrudWorkout'
+
 
 export default function UserWorkout({sessionData}) {
     const {user} = sessionData
     const { workoutId, setWorkoutId } = useBuilderContext()
     const [workout, setWorkout] = useState([])
+    const [isWorkoutData, setIsWorkoutData] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false)
 
+    function updateState(currentState, method) {
+      console.log("in updatooor",currentState)
+      if(method === "delete"){
+        console.log(currentState, method)
+        setWorkout([])
+      }else{
+        setWorkout((current) => {
+        return( 
+        {
+          ...current,
+          exercise_data: currentState
+        })
+      })
+      const isData = dataChecker(workout)
+      setIsWorkoutData(isData)
+      }
+      
+    }
+
+    const dataChecker = (workout) =>{ 
+      let valid = false
+      if(workout){
+        console.log("in the data checker:", workout.exercise_data)
+        workout.exercise_data && workout.exercise_data.length > 0 ?
+        valid = true : valid = false
+      }
+      return valid
+      
+    }
     useEffect(() => {
       setIsLoaded(true)
-    }, [])
+      const isData = dataChecker(workout)
+      setIsWorkoutData(isData)
+    }, [workout])
 
 
     useEffect(() => {
@@ -74,18 +108,23 @@ export default function UserWorkout({sessionData}) {
       fetchWorkout()
       }
     }, [])
+
+
+   
     console.log(workoutId, workout)
   return (
     <>
     <Card className="m-4">
         <CardContent>
-        <CardHeader>
-                <TypographyH1 text={user.name}/>
-                <TypographyP text={"This section will track your workout as you build it!"}/>
-
-          </CardHeader>
-          <WorkoutDisplay workout={workout} workoutId={workoutId}/>
-          <WorkoutAreasDisplay workoutData={workout.exercise_data} workoutId={workoutId}/>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div className='p-2 m-2'>
+            <TypographyH1 text={user.name}/>
+            <TypographyP text={"This section will track your workout as you build it!"}/>
+          </div>
+          <CrudWorkout isWorkoutData={isWorkoutData} workoutId={workoutId} workout={workout} updateState={updateState}/>
+        </CardHeader>
+          <WorkoutDisplay workout={workout} workoutId={workoutId} updateState={updateState}/>
+          <WorkoutAreasDisplay workoutData={workout.exercise_data} workoutId={workoutId} updateState={updateState}/>
         </CardContent>
     </Card>
     </>

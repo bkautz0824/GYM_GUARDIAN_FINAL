@@ -12,11 +12,8 @@ case "GET":
         const { id } = req.query;
          // Retrieve the muscle_group query parameter
         if (id) {
-          console.log("by id", id)
-          console.log(db.collection('Workouts'))
           // If a muscle_group parameter is provided, filter exercises by muscle_group
           const exercises = await db.collection("Workouts").findOne({ _id: String(id) });
-          console.log(exercises)
           res.json({ status: 200, data: exercises });
         }
         else {
@@ -126,6 +123,26 @@ case "PUT":
     // await db.collection("Workouts").insertOne(userFields);
     res.json({ status: 200, data: workoutEntry, message: 'Exercise Information successfully created!' });
     break;
-       
+
+
+  case "DELETE":
+    let idToDelete = req.query.id
+    if (!idToDelete) {
+      return res.status(400).json({ status: 400, message: 'No ID provided for deletion' });
+    }
+  
+    const checkWorkout = await db.collection('Workouts').findOne({ _id: String(idToDelete) });
+
+    if(checkWorkout){
+      const deleteResult = await db.collection('Workouts').deleteOne({ _id: idToDelete });
+        if (deleteResult.acknowledged) {
+          return res.status(200).json({ status: 200, message: 'Workout deleted successfully' });
+        } else {
+          return res.status(500).json({ status: 500, message: 'Failed to delete workout' });
+        }
+
+    }else{
+      return res.status(404).json({ status: 404, message: 'Workout not found!' });
     }
   }
+}

@@ -16,7 +16,6 @@ export default function WorkoutDisplay({workout, workoutId}) {
 
   useEffect(() => {
     let state = []
-    console.log(workout)
     Object.keys(workout).forEach((key) => {
       let valueInput = workout[key].value;
       if (typeof valueInput === 'number' || typeof valueInput === 'string') {
@@ -35,11 +34,9 @@ export default function WorkoutDisplay({workout, workoutId}) {
 
   setWorkoutState(state)
   },[workout])
-console.log(workoutState)
   
   const handleChange = (i, newValue) => {
     const state = [...workoutState]
-      console.log(i, newValue)
     const index = state.findIndex((item, idx) => idx === i);
   
     if (index !== -1) {
@@ -50,7 +47,6 @@ console.log(workoutState)
 
   const toggleEditMode = async (i) => {
     if (workoutState[i].editMode) {
-      console.log(workoutId, workoutState[i].valueInput, workoutState[i].key)
       setWorkoutState((prevWorkoutData) =>
             prevWorkoutData.map((item, index) =>
               index === i ? { ...item, editMode: !item.editMode } : item
@@ -111,7 +107,6 @@ console.log(workoutState)
       
      {workoutState.length > 0 ? (
         workoutState.map((item, i) => {
-          console.log(item.key)
             return (
               <div key={item.label + i} className='m-2 '>
                 
