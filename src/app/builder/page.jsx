@@ -23,7 +23,7 @@ export default async function Builder() {
     
   return (
     <>
-     <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover`}>
+     <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover max-sm:mx-2`}>
         
         <Card className="items-center bg-primary">
             <CardHeader>
@@ -34,7 +34,7 @@ export default async function Builder() {
           
         </Card>
      
-        <CardContent className="">
+        <CardContent>
             <div className="p-4 space-x-4 ">
                 <Card className="p-4 bg-primary">
                     <TypographyH3 text={"Select an area of focus..."} />

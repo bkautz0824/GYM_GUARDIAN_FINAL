@@ -205,9 +205,9 @@ export default function AreaOfFocus() {
   
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
-      <Card className={`m-4 bg-primary text-primary shadow-slate-100 shadow-2xl w-3/4`}>
-        <div className='p-4'>
-        <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ "  shadow-md shadow-black-50 text-white hover:shadow-white-50"}>Back to Editor</Link>
+      <Card className={`m-4 bg-primary text-primary shadow-slate-100 shadow-2xl w-3/4 max-sm:w-full max-sm:mx-1`}>
+        <div className='p-4 mobile:p-2'>
+        <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ " shadow-md shadow-black-50 text-white hover:shadow-white-50 sm:max-w-sm sm:text-red-500"}>Back to Editor</Link>
         </div>
         
         <CardHeader className="items-center text-slate-800">
@@ -229,7 +229,7 @@ export default function AreaOfFocus() {
               variant="secondary"
               role="combobox"
               aria-expanded={open}
-              className="w-[200px] justify-between mx-2 text-slate-200"
+              className="w-[200px] justify-between mx-2 text-slate-200 max-sm:mx-0"
             >
              
                 Select framework...

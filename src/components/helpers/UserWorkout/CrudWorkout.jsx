@@ -113,8 +113,8 @@ export default function CrudWorkout({isWorkoutData, workoutId, workout, updateSt
     <>
      {
         isWorkoutData ? 
-        <div>
-         <Button onClick={deleteWorkout}>Delete Workout</Button>
+        <div className='max-sm:flex'>
+         <Button onClick={deleteWorkout} >Delete Workout</Button>
          <Button onClick={finalizeWorkout} className="ml-2">Finalize Workout</Button>
         </div>
          : 

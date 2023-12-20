@@ -94,10 +94,10 @@ export default function UserWorkout({sessionData}) {
 
   return (
     <>
-    <Card className="m-4">
+    <Card className="m-4 max-sm:m-2">
         <CardContent>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div className='p-2 m-2'>
+        <CardHeader className="flex flex-row items-center justify-between max-sm:flex-col">
+          <div className='p-2 m-2 max-sm:p-1 max-sm:m-1 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-between max-sm:w-full'>
             <TypographyH1 text={user.name}/>
             <TypographyP text={"This section will track your workout as you build it!"}/>
           </div>

@@ -10,9 +10,11 @@ import {
   } from "@/components/ui/table"
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { useMediaQuery } from '@react-hook/media-query';
 
 export default function WorkoutAreaHelper({data, parentIndex, editMode, handleInputChange, workoutId, handleRowDelete}) {
-
+  const isSmallScreen = useMediaQuery('(max-width: 480px)');
+  console.log(isSmallScreen)
   // let [entryState, setEntryState] = React.useState(data)
   
   const handleEntryChange = (index, key, value,) => {
@@ -78,9 +80,11 @@ export default function WorkoutAreaHelper({data, parentIndex, editMode, handleIn
 
 
       return(
-      <TableRow key={i} className={`h-10 bg-secondary/80 `} id={`${item.profile}_${i}_cell`}>
-
-        <TableCell className="font-medium">{item.profile}</TableCell>
+      <TableRow key={i} className={`h-10 bg-secondary/80`} id={`${item.profile}_${i}_cell`}>
+        {
+          isSmallScreen ? null :<TableCell className="font-medium">{item.profile}</TableCell>
+        }
+        
         <TableCell >
           <Input
             readOnly={editMode ? false : true}
@@ -107,7 +111,7 @@ export default function WorkoutAreaHelper({data, parentIndex, editMode, handleIn
         <TableCell>
           <textarea
             readOnly={editMode ? false : true}
-            className="p-0.5 text-sm resize-y bg-inherit border-neutral-50 w-full"
+            className="p-0.5 text-sm resize-y bg-inherit border-neutral-50 w-full max-sm:h-20"
             key={`notes_${i}`}
             placeholder="Notes..."
             value={item.notes}
@@ -123,8 +127,8 @@ export default function WorkoutAreaHelper({data, parentIndex, editMode, handleIn
         </TableCell>
         {
           editMode ? 
-          <TableCell className="flex justify-center">
-            <Button onClick={(() => handleDelete(i))}>X</Button>
+          <TableCell className="flex justify-center max-sm:items-center max-sm:flex-col max-sm:justify-center">
+            <Button onClick={(() => handleDelete(i))}  className="max-sm:w-5 max-sm:h-7">X</Button>
           </TableCell>
           : null
         }
