@@ -3,12 +3,6 @@ import Image from 'next/image'
 import { TypographyH1, TypographyP } from '@/components/typography/Typography'
 import Link from 'next/link'
 import { buttonVariants } from "@/components/ui/button"
-import Hero from '@/components/shadcn-ui/Hero'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from "@/components/ui/card"
 import { DotPattern } from '@/components/page-layouts/DotPattern'
 import { getServerSession } from "next-auth"
 
@@ -32,10 +26,10 @@ export default async function Home() {
         <div className='flex flex-col p-5 text-white z-[2] justify-between  h-full'>
         
           
-          <Link href="/builder" className={buttonVariants({ variant: "default" })+ "  shadow-md shadow-black/50 text-white"}>View My Workouts</Link>
-          <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ "  shadow-md shadow-black/50 text-white"}>Workout Editor/Creator</Link>
-          <Link href="/data-display" className={buttonVariants({ variant: "default" })+ " shadow-md shadow-black/50 text-white"}>My Workout Data</Link>
-          <Link href="/calender" className={buttonVariants({ variant: "secondary" })+ "  shadow-md shadow-black/50 text-white"}>Calendar</Link>
+          <Link href="/builder" className={buttonVariants({ variant: "default" })+ " shadow-md shadow-black-50 text-white hover:shadow-white-50"}>View My Workouts</Link>
+          <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ "  shadow-md shadow-black-50 text-white hover:shadow-white-50"}>Workout Editor/Creator</Link>
+          <Link href="/data-display" className={buttonVariants({ variant: "default" })+ " shadow-md shadow-black-50 text-white hover:shadow-white-50"}>My Workout Data</Link>
+          <Link href="/calender" className={buttonVariants({ variant: "secondary" })+ "  shadow-md shadow-black-50 text-white hover:shadow-white-50"}>Calendar</Link>
 
         </div>
 

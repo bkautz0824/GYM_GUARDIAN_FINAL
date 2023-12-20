@@ -24,11 +24,11 @@ export default function WorkoutAreasDisplay({workoutData, workoutId, updateState
 
  useEffect(() => {
     // Initialize edit states array with `false` for each item in workoutData
-    workoutData ? setWorkoutState(workoutData) : null
+    workoutData ? setWorkoutState(workoutData) : setWorkoutState([])
     workoutData ? 
     setEditState(Array(workoutData.length).fill(false)) : null
   }, [workoutData]);
-console.log(workoutState)
+console.log(workoutData)
   
 
   const setEditMode = (index, value) => {

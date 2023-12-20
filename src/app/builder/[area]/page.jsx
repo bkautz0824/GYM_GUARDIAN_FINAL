@@ -35,7 +35,8 @@ import { useSearchParams } from 'next/navigation'
 import TableRowComponent from '@/components/helpers/TableRowComponent'
 import exercisesData from '@/data/GYM-GUARDIAN.Exercises'
 import { useBuilderContext } from '@/context/exercise-context'
-
+import Link from 'next/link'
+import { buttonVariants } from "@/components/ui/button"
 // import { getExercises } from '@/api-requests/exercises-requests'
 
 export default function AreaOfFocus() {
@@ -51,8 +52,11 @@ export default function AreaOfFocus() {
   const [state, setState] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true)
 
+
+
   React.useEffect(() => {
     return () => {
+      setLoading(false)
       let activeGroup = exercisesData.filter((item) => item.muscle_group === area)
       
       setExerciseState({
@@ -202,12 +206,16 @@ export default function AreaOfFocus() {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
       <Card className={`m-4 bg-primary text-primary shadow-slate-100 shadow-2xl w-3/4`}>
+        <div className='p-4'>
+        <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ "  shadow-md shadow-black-50 text-white hover:shadow-white-50"}>Back to Editor</Link>
+        </div>
+        
         <CardHeader className="items-center text-slate-800">
             <TypographyH1 text={area}/>
             <TypographyP text={"Use this page to start building your own workout! If the exercise is not weighted, just put your body weight."}/>
 
             <Button
-              className={"bg-secondary rounded-md"}
+              className={"bg-secondary/80 rounded-md"}
               onClick={() => updateExerciseData(state)}
             >
               Submit Data to Workout
@@ -294,9 +302,6 @@ export default function AreaOfFocus() {
      
     </Card>
 
-    <div>
-     
-      </div>
     </div>
   )
 }

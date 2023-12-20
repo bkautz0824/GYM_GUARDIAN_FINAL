@@ -12,6 +12,7 @@ import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import UserWorkout from "@/components/helpers/UserWorkout"
 
+
 export default async function Builder() {
     const session = await getServerSession()
     
@@ -23,10 +24,12 @@ export default async function Builder() {
   return (
     <>
      <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover`}>
+        
         <Card className="items-center bg-primary">
             <CardHeader>
                 <TypographyH1 text={'Builder'}/>
                 <TypographyP text={"Use this page to start building your own workout!"}/>
+                <TypographyMuted text={"Scroll down to view current workout..."}/>
             </CardHeader>
           
         </Card>
@@ -59,11 +62,6 @@ export default async function Builder() {
             }
             </div>
         </CardContent>
-        {/* <Card>
-            <Link href={"builder/current_workout"} className={buttonVariants({ variant: "secondary" }) + "text-secondary"}>
-                Current Workout
-            </Link>
-        </Card> */}
     </Card>
     <UserWorkout sessionData={session} />
     </>

@@ -24,7 +24,12 @@ export default function UserWorkout({sessionData}) {
       if(method === "delete"){
         console.log(currentState, method)
         setWorkout([])
-      }else{
+      }else if(method === "create"){
+        console.log(currentState, method)
+        setWorkout(currentState)
+        setWorkoutId(currentState._id)
+      }
+      else{
         setWorkout((current) => {
         return( 
         {
@@ -51,12 +56,12 @@ export default function UserWorkout({sessionData}) {
     useEffect(() => {
       setIsLoaded(true)
       const isData = dataChecker(workout)
+      console.log(isData)
       setIsWorkoutData(isData)
     }, [workout])
 
-
     useEffect(() => {
-      if(!workoutId){
+  
         console.log("found ya")
          const fetchEditWorkout = async () =>{
             try{
@@ -70,48 +75,23 @@ export default function UserWorkout({sessionData}) {
                 )
                 if (response.ok) {
                   const data = await response.json();
+                  console.log(data)
                   setWorkoutId(data.data._id)
                   setWorkout(data.data)
-                  console.log(data.data);
-                } else {
-                  console.error("Error:", response.status, response.statusText);
-                }
+                } 
+                // else {
+                //   console.error("Error:", response.status, response.statusText);
+                // }
 
             }catch (error){
                 console.error("Error")
             }
-        }
-        fetchEditWorkout()
-      }else{
-        console.log("found no", workoutId)
-        const fetchWorkout = async () =>{
-          try{
-              const response = await fetch(`http://localhost:3000/api/workout?id=${workoutId}`,
-              {
-              method: "GET",
-              headers: {
-                  'Content-Type': 'application/json',
-                  // Add any additional headers if needed
-                },}
-              )
-              if (response.ok) {
-                const data = await response.json();
-                setWorkout(data.data)
-                
-              } else {
-                console.error("Error:", response.status, response.statusText);
-              }
-          }catch (error){
-              console.error("Error")
-          }
-      }
-      fetchWorkout()
-      }
+       
+      } 
+      fetchEditWorkout()
     }, [])
 
 
-   
-    console.log(workoutId, workout)
   return (
     <>
     <Card className="m-4">
@@ -121,7 +101,7 @@ export default function UserWorkout({sessionData}) {
             <TypographyH1 text={user.name}/>
             <TypographyP text={"This section will track your workout as you build it!"}/>
           </div>
-          <CrudWorkout isWorkoutData={isWorkoutData} workoutId={workoutId} workout={workout} updateState={updateState}/>
+          <CrudWorkout isWorkoutData={isWorkoutData} workoutId={workoutId} workout={workout} updateState={updateState} user={user}/>
         </CardHeader>
           <WorkoutDisplay workout={workout} workoutId={workoutId} updateState={updateState}/>
           <WorkoutAreasDisplay workoutData={workout.exercise_data} workoutId={workoutId} updateState={updateState}/>
