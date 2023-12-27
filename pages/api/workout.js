@@ -27,7 +27,7 @@ case "POST":
     // let workoutData = req.body
     console.log("Handling POST request");
     
-    if(!req.body.user){
+    if(!req.body.user || !req.body.email){
       res.status(400).json({error: "User must be logged in to create a new workout"})
     }
 
@@ -42,7 +42,7 @@ case "POST":
       const workoutData = {
         _id: String(workoutId),
         status:  req.body.status || "Edit",
-        date: req.body.date || customDate,
+        date: new Date(req.body.date) || customDate,
         length: {
           value: req.body.length || '0',
           label: 'Length',

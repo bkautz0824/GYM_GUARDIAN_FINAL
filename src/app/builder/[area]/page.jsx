@@ -223,7 +223,8 @@ export default function AreaOfFocus() {
         </CardHeader>
         <CardContent>
 
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover open={open} onOpenChange={setOpen}
+        >
           <PopoverTrigger asChild>
             <Button
               variant="secondary"
@@ -246,7 +247,7 @@ export default function AreaOfFocus() {
                     key={Math.random()}
                     onSelect={() => {
                       handleValue({name: exercise.name, profile:exercise.muscle_profile})
-                      setOpen(false)
+                      
                     }}
                   >
                     {exercise.name}

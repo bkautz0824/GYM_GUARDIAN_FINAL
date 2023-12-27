@@ -15,20 +15,23 @@ export default function WorkoutDisplay({workout, workoutId}) {
   const [workoutState, setWorkoutState] = useState([])
 
   useEffect(() => {
-    let state = []
+    let state = [];
     Object.keys(workout).forEach((key) => {
-      let valueInput = workout[key].value;
-      if (typeof valueInput === 'number' || typeof valueInput === 'string') {
-        let label = workout[key].label;
-        let description = workout[key].description;
-
-        state.push({
-          label: label,
-          description: description,
-          valueInput: valueInput,
-          editMode: false,
-          key: key
-        });
+      if (typeof workout[key] === 'object') {
+        console.log(workout[key], key)
+        let valueInput = workout[key].value
+        if (typeof valueInput === 'number' || typeof valueInput === 'string') {
+          let label = workout[key].label;
+          let description = workout[key].description;
+  
+          state.push({
+            label: label,
+            description: description,
+            valueInput: valueInput,
+            editMode: false,
+            key: key
+          });
+        }
       }
     });
 
@@ -94,8 +97,6 @@ export default function WorkoutDisplay({workout, workoutId}) {
         )
       );
 
-      // Display an alert
-      alert(`You may now edit ${workoutState[i].label} data`);
     }
   };
 

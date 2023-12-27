@@ -25,7 +25,7 @@ export default async function Builder() {
     <>
      <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover max-sm:mx-2`}>
         
-        <Card className="items-center bg-primary">
+        <Card className="items-center shadow-2xl bg-primary shadow-primary">
             <CardHeader>
                 <TypographyH1 text={'Builder'}/>
                 <TypographyP text={"Use this page to start building your own workout!"}/>
@@ -36,7 +36,7 @@ export default async function Builder() {
      
         <CardContent>
             <div className="p-4 space-x-4 ">
-                <Card className="p-4 bg-primary">
+                <Card className="p-4 shadow-2xl bg-primary shadow-primary">
                     <TypographyH3 text={"Select an area of focus..."} />
                 </Card>
                 
@@ -52,7 +52,7 @@ export default async function Builder() {
                                 }
                             } }
                       
-                            className={buttonVariants({ variant: "secondary" }) + "text-secondary"}
+                            className={buttonVariants({ variant: "secondary" }) + "text-secondary hover:shadow-xl hover:shadow-primary hover:bg-secondary/80"}
                             >{item.muscle_group}
                         </Link>
                         </div>
