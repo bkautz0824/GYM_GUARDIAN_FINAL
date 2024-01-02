@@ -8,7 +8,7 @@ const {data: session} = useSession();
 
 if(session){
   return (
-    <div className="flex p-2">
+    <div className="flex p-2 ">
       <img
           src={session?.user?.image || '/default-avatar.png'} // Replace '/default-avatar.png' with your default image path
           alt={session?.user?.name}

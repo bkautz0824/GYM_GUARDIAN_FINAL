@@ -34,7 +34,7 @@ export default async function RootLayout({ children }) {
             >
         <NextAuthProvider session={session}>
              
-          <div className="my-8 bg-black"> {/* Increased padding for better spacing */}
+          <header className="my-8 bg-black"> {/* Increased padding for better spacing */}
             <div className="w-full p-4 px-1 mx-auto"> {/* Center content with max-width */}
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center justify-between w-full"> {/* Center the logo and text */}
@@ -49,7 +49,7 @@ export default async function RootLayout({ children }) {
                   />
 
                 </Link>
-                  <h1 className="ml-2 text-2xl font-bold text-white">Welcome to Gym Guardian</h1>
+                  <h1 className="ml-2 text-2xl font-bold text-white max-sm:hidden">Welcome to Gym Guardian</h1>
                 
                 <p className="text-sm text-gray-400">
                   &nbsp; B & D Developers
@@ -65,7 +65,7 @@ export default async function RootLayout({ children }) {
                 </div>
               </div>
             </div>
-          </div>
+          </header>
         
             
                 {/* <AvatarUse/> */}
@@ -73,6 +73,10 @@ export default async function RootLayout({ children }) {
         
       
             {children}  
+
+        <footer className="flex justify-center p-4">
+          GYM GUARDIAN
+        </footer>
         </NextAuthProvider>
         </ThemeProvider>
        

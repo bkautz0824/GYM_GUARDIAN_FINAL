@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { useParams } from 'next/navigation'
+import { redirect, useParams } from 'next/navigation'
 import {
     Card,
     CardContent,
@@ -37,6 +37,7 @@ import exercisesData from '@/data/GYM-GUARDIAN.Exercises'
 import { useBuilderContext } from '@/context/exercise-context'
 import Link from 'next/link'
 import { buttonVariants } from "@/components/ui/button"
+import { update } from 'lodash'
 // import { getExercises } from '@/api-requests/exercises-requests'
 
 export default function AreaOfFocus() {
@@ -52,7 +53,7 @@ export default function AreaOfFocus() {
   const [state, setState] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true)
 
-
+  console.log(state)
 
   React.useEffect(() => {
     return () => {
@@ -63,30 +64,9 @@ export default function AreaOfFocus() {
         ...exercisesState,
         exercises:activeGroup[0].exercises,
       })
+
     };
   }, [])
-
-
-  // React.useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`http://localhost:3000/api/exercises?muscle_group=${area}`, {
-  //         method: "GET",
-  //       });
-  //       if (!response.ok) {
-  //         throw new Error(`Request failed with status: ${response.status}`);
-  //       }
-  //       const res = await response.json();
-  //       // console.log(res.data[0].exercises);
-  //       setExercises(res.data[0].exercises); // Assuming the response structure contains the exercises directly
-  
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //       // Handle the error, e.g., display an error message to the user
-  //     }
-  //   };
-  //    fetchData(); 
-  // }, []);
 
 
 
@@ -134,18 +114,23 @@ export default function AreaOfFocus() {
     
     setState((prevState) =>{
       const updatedData = prevState[index].data.filter((item, currentIndex) => currentIndex !== i);
-      return [
-        ...prevState.slice(0, index),
-        {
-          name: name,
-          data: updatedData,
-        },
-        ...prevState.slice(index + 1),
-      ];
-    
+      if(updatedData.length < 1){
+        console.log("empty", prevState)
+      }
+       {
+        return [
+          ...prevState.slice(0, index),
+          {
+            name: name,
+            data: updatedData,
+          },
+          ...prevState.slice(index + 1),
+        ];
+      }
       })
     
   };
+  console.log(state)
   
 
   const handleChange = (rowIndex, key, value, dataRowIndex) => {
@@ -160,11 +145,14 @@ export default function AreaOfFocus() {
     });
   };
 
-  const updateExerciseData = (data) => {
-    console.log(workoutId, data)
-    if(data.length < 1){
+  const updateExerciseData = () => {
+    console.log(workoutId, state, state.data)
+    if(state & state.length < 1){
       alert("You have not entered any data!")
-    }else{
+    }else if(!workoutId){
+      alert("You have not created a workout yet!")
+    }
+    else{
       const submitData = async () => {
         try{
           const response = await fetch(`http://localhost:3000/api/workout`,
@@ -176,7 +164,7 @@ export default function AreaOfFocus() {
               },
             body: JSON.stringify({
               id: workoutId,
-              data: data
+              data: state
             })
           }
   
@@ -216,7 +204,7 @@ export default function AreaOfFocus() {
 
             <Button
               className={"bg-secondary/80 rounded-md"}
-              onClick={() => updateExerciseData(state)}
+              onClick={() => updateExerciseData()}
             >
               Submit Data to Workout
             </Button>

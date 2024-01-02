@@ -42,7 +42,7 @@ case "POST":
       const workoutData = {
         _id: String(workoutId),
         status:  req.body.status || "Edit",
-        date: new Date(req.body.date) || customDate,
+        date: req.body.date ? new Date(req.body.date) : customDate,
         length: {
           value: req.body.length || '0',
           label: 'Length',

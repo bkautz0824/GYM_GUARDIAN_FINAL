@@ -25,7 +25,7 @@ export function TypographyBlockquote({text}) {
   
   export function TypographyH3({text}) {
     return (
-      <h3 className="text-2xl font-semibold tracking-tight scroll-m-20">
+      <h3 className="text-2xl font-semibold tracking-tight scroll-m-20 max-sm:text-xl">
         {text}
       </h3>
     )

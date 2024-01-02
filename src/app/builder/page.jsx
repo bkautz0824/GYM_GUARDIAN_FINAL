@@ -25,7 +25,7 @@ export default async function Builder() {
     <>
      <Card className={`flex m-to items-center justify-center h-screen mb-12 bg-fixed bg-center bg-img bg-no-repeat bg-cover max-sm:mx-2`}>
         
-        <Card className="items-center shadow-2xl bg-primary shadow-primary">
+        <Card className="items-center shadow-2xl bg-primary shadow-primary max-sm:ml-4">
             <CardHeader>
                 <TypographyH1 text={'Builder'}/>
                 <TypographyP text={"Use this page to start building your own workout!"}/>
@@ -37,7 +37,7 @@ export default async function Builder() {
         <CardContent>
             <div className="p-4 space-x-4 ">
                 <Card className="p-4 shadow-2xl bg-primary shadow-primary">
-                    <TypographyH3 text={"Select an area of focus..."} />
+                    <TypographyH3 text={"Select area of focus..."} />
                 </Card>
                 
                 {
