@@ -1,4 +1,4 @@
-import {clientPromise} from "../../lib/mongodb";
+import {clientPromise} from "../../db/mongodb";
 import _ from "lodash"
 import { ObjectId } from 'mongodb';
 

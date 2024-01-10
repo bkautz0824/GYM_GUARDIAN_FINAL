@@ -1,14 +1,5 @@
-
-import Image from 'next/image'
-import { TypographyH1, TypographyP } from '@/components/typography/Typography'
 import Link from 'next/link'
 import { buttonVariants } from "@/components/ui/button"
-import Hero from '@/components/shadcn-ui/Hero'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from "@/components/ui/card"
 import { DotPattern } from '@/components/page-layouts/DotPattern'
 import { getServerSession } from "next-auth"
 

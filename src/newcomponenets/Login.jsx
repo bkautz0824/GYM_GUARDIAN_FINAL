@@ -1,20 +1,20 @@
-"use client";
+// "use client";
 
-import React, {useEffect, useState, useRef } from 'react'
-import { useRouter } from 'next/navigation';
-import Link from 'next/link'
+// import React, {useEffect, useState, useRef } from 'react'
+// import { useRouter } from 'next/navigation';
+// import Link from 'next/link'
 
 
 
-export default function Login(){
-    const router = useRouter();
+// export default function Login(){
+//     const router = useRouter();
 
-    useEffect(() => {
-        //handle user session here later
-      }, );
+//     useEffect(() => {
+//         //handle user session here later
+//       }, );
    
-      const emailOrUsernameRef = useRef<any>(null)
-      const passwordref = useRef<any>(null)
+//       const emailOrUsernameRef = useRef<any>(null)
+//       const passwordref = useRef<any>(null)
 
    
 
@@ -24,47 +24,47 @@ export default function Login(){
     
       
       
-    return (
-    <>
-<form >
-                    <input
-                        className=" text-white block border border-grey-light w-full p-3 rounded mb-4"
-                        name="email"
-                        placeholder="Email or Username" />
+//     return (
+//     <>
+// <form >
+//                     <input
+//                         className="block w-full p-3 mb-4 text-white border rounded  border-grey-light"
+//                         name="email"
+//                         placeholder="Email or Username" />
                         
-                    <input 
-                        type="password"
+//                     <input 
+//                         type="password"
 
                       
-                        className=" text-white block border border-grey-light w-full p-3 rounded mb-4"
-                        name="password"
-                        placeholder="Password" />
-                    <button
-                        type="submit"
-                        className=" bg-indigo-500 w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
-                    >Login</button>
+//                         className="block w-full p-3 mb-4 text-white border rounded  border-grey-light"
+//                         name="password"
+//                         placeholder="Password" />
+//                     <button
+//                         type="submit"
+//                         className="w-full py-3 my-1 text-center text-white bg-indigo-500 rounded  bg-green hover:bg-green-dark focus:outline-none"
+//                     >Login</button>
 
-                    <div className="text-center text-sm text-grey-dark mt-4">
-                        By Logining in, you agree to the &nbsp;
-                        <Link className="no-underline border-b " href="#">
-                            Terms of Service
-                        </Link> and &nbsp;
-                        <Link className="no-underline border-b " href="#">
-                            Privacy Policy
-                        </Link>
-                    </div>
+//                     <div className="mt-4 text-sm text-center text-grey-dark">
+//                         By Logining in, you agree to the &nbsp;
+//                         <Link className="no-underline border-b " href="#">
+//                             Terms of Service
+//                         </Link> and &nbsp;
+//                         <Link className="no-underline border-b " href="#">
+//                             Privacy Policy
+//                         </Link>
+//                     </div>
 
-                <div className="text-grey-dark mt-6">
-                    Don't have an account? &nbsp;
+//                 <div className="mt-6 text-grey-dark">
+//                     Don't have an account? &nbsp;
                     
-                    <Link className="no-underline border-b border-blue text-blue" href="../signup/">
-                    Sign up
-                    </Link>.
+//                     <Link className="no-underline border-b border-blue text-blue" href="../signup/">
+//                     Sign up
+//                     </Link>.
 
-                </div>
+//                 </div>
 
-                </form>
-    </>
-    )
-  }
+//                 </form>
+//     </>
+//     )
+//   }
   

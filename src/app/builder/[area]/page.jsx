@@ -6,7 +6,7 @@ import {
     CardContent,
     CardHeader,
   } from "@/components/ui/card"
-import { TypographyLarge, TypographyH1, TypographyMuted, TypographyP, TypographyH3 } from '@/components/typography/Typography'
+import {TypographyH1, TypographyP } from '@/components/typography/Typography'
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 import {
   Table,
@@ -40,26 +40,27 @@ import { useBuilderContext } from '@/context/exercise-context'
 
 export default function AreaOfFocus() {
   const {area} = useParams()
-
+  console.log(exercisesData)
   const [exercisesState, setExerciseState] = React.useState({
     exercises: [],
   })
 
+
   const { workoutId, setWorkoutId } = useBuilderContext()
-  console.log(workoutId)
+ 
   const [open, setOpen] = React.useState(false)
   const [state, setState] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
-    return () => {
+      console.log(exercisesData)
       let activeGroup = exercisesData.filter((item) => item.muscle_group === area)
       
       setExerciseState({
         ...exercisesState,
         exercises:activeGroup[0].exercises,
       })
-    };
+
   }, [])
 
 

@@ -25,7 +25,6 @@ case "GET":
   
 case "POST":
     // let workoutData = req.body
-    console.log("Handling POST request");
     const existingWorkout = await db.collection('Workouts').findOne({ _id: req.body._id });
 
     if(!req.body.user){
