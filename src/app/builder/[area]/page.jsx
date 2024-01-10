@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { useParams } from 'next/navigation'
+import { redirect, useParams } from 'next/navigation'
 import {
     Card,
     CardContent,
@@ -35,6 +35,8 @@ import { useSearchParams } from 'next/navigation'
 import TableRowComponent from '@/components/helpers/TableRowComponent'
 import exercisesData from '@/data/GYM-GUARDIAN.Exercises'
 import { useBuilderContext } from '@/context/exercise-context'
+import Link from 'next/link'
+import { buttonVariants } from "@/components/ui/button"
 
 // import { getExercises } from '@/api-requests/exercises-requests'
 
@@ -52,6 +54,8 @@ export default function AreaOfFocus() {
   const [state, setState] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true)
 
+  console.log(state)
+
   React.useEffect(() => {
       console.log(exercisesData)
       let activeGroup = exercisesData.filter((item) => item.muscle_group === area)
@@ -61,29 +65,8 @@ export default function AreaOfFocus() {
         exercises:activeGroup[0].exercises,
       })
 
+
   }, [])
-
-
-  // React.useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`http://localhost:3000/api/exercises?muscle_group=${area}`, {
-  //         method: "GET",
-  //       });
-  //       if (!response.ok) {
-  //         throw new Error(`Request failed with status: ${response.status}`);
-  //       }
-  //       const res = await response.json();
-  //       // console.log(res.data[0].exercises);
-  //       setExercises(res.data[0].exercises); // Assuming the response structure contains the exercises directly
-  
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //       // Handle the error, e.g., display an error message to the user
-  //     }
-  //   };
-  //    fetchData(); 
-  // }, []);
 
 
 
@@ -131,18 +114,23 @@ export default function AreaOfFocus() {
     
     setState((prevState) =>{
       const updatedData = prevState[index].data.filter((item, currentIndex) => currentIndex !== i);
-      return [
-        ...prevState.slice(0, index),
-        {
-          name: name,
-          data: updatedData,
-        },
-        ...prevState.slice(index + 1),
-      ];
-    
+      if(updatedData.length < 1){
+        console.log("empty", prevState)
+      }
+       {
+        return [
+          ...prevState.slice(0, index),
+          {
+            name: name,
+            data: updatedData,
+          },
+          ...prevState.slice(index + 1),
+        ];
+      }
       })
     
   };
+  console.log(state)
   
 
   const handleChange = (rowIndex, key, value, dataRowIndex) => {
@@ -157,11 +145,14 @@ export default function AreaOfFocus() {
     });
   };
 
-  const updateExerciseData = (data) => {
-    console.log(workoutId, data)
-    if(data.length < 1){
+  const updateExerciseData = () => {
+    console.log(workoutId, state, state.data)
+    if(state & state.length < 1){
       alert("You have not entered any data!")
-    }else{
+    }else if(!workoutId){
+      alert("You have not created a workout yet!")
+    }
+    else{
       const submitData = async () => {
         try{
           const response = await fetch(`http://localhost:3000/api/workout`,
@@ -173,7 +164,7 @@ export default function AreaOfFocus() {
               },
             body: JSON.stringify({
               id: workoutId,
-              data: data
+              data: state
             })
           }
   
@@ -202,27 +193,32 @@ export default function AreaOfFocus() {
   
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
-      <Card className={`m-4 bg-primary text-primary shadow-slate-100 shadow-2xl w-3/4`}>
+      <Card className={`m-4 bg-primary text-primary shadow-slate-100 shadow-2xl w-3/4 max-sm:w-full max-sm:mx-1`}>
+        <div className='p-4 mobile:p-2'>
+        <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ " shadow-md shadow-black-50 text-white hover:shadow-white-50 sm:max-w-sm sm:text-red-500"}>Back to Editor</Link>
+        </div>
+        
         <CardHeader className="items-center text-slate-800">
             <TypographyH1 text={area}/>
             <TypographyP text={"Use this page to start building your own workout! If the exercise is not weighted, just put your body weight."}/>
 
             <Button
-              className={"bg-secondary rounded-md"}
-              onClick={() => updateExerciseData(state)}
+              className={"bg-secondary/80 rounded-md"}
+              onClick={() => updateExerciseData()}
             >
               Submit Data to Workout
             </Button>
         </CardHeader>
         <CardContent>
 
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover open={open} onOpenChange={setOpen}
+        >
           <PopoverTrigger asChild>
             <Button
               variant="secondary"
               role="combobox"
               aria-expanded={open}
-              className="w-[200px] justify-between mx-2 text-slate-200"
+              className="w-[200px] justify-between mx-2 text-slate-200 max-sm:mx-0"
             >
              
                 Select framework...
@@ -239,7 +235,7 @@ export default function AreaOfFocus() {
                     key={Math.random()}
                     onSelect={() => {
                       handleValue({name: exercise.name, profile:exercise.muscle_profile})
-                      setOpen(false)
+                      
                     }}
                   >
                     {exercise.name}
@@ -295,9 +291,6 @@ export default function AreaOfFocus() {
      
     </Card>
 
-    <div>
-     
-      </div>
     </div>
   )
 }

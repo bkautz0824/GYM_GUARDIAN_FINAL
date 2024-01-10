@@ -15,20 +15,23 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { Button } from '@/components/ui/button'
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import WorkoutAreaHelper from './WorkoutAreas/WorkoutAreaHelper'
+import { useMediaQuery } from '@react-hook/media-query';
+
 
 export default function WorkoutAreasDisplay({workoutData, workoutId, updateState}) {
   let [workoutState, setWorkoutState] = useState([])
   let [editState, setEditState] = useState([])
+  const isSmallScreen = useMediaQuery('(max-width: 480px)');
+console.log(isSmallScreen)
 
  useEffect(() => {
     // Initialize edit states array with `false` for each item in workoutData
-    workoutData ? setWorkoutState(workoutData) : null
+    workoutData ? setWorkoutState(workoutData) : setWorkoutState([])
     workoutData ? 
     setEditState(Array(workoutData.length).fill(false)) : null
   }, [workoutData]);
-console.log(workoutState)
+console.log(workoutData)
   
 
   const setEditMode = (index, value) => {
@@ -123,9 +126,9 @@ console.log(workoutState)
       workoutState.length > 0 ? workoutState.map((item, i) => {
         
         return (
-          <Card key={item.name + i} className="p-4 m-2" >
-              <div className='flex justify-between'>
-              <div className='flex items-center'>
+          <Card key={item.name + i} className="p-4 m-2 max-sm:m-0 max-sm:w-full" >
+              <div className='flex justify-between max-sm:flex-col max-sm:p-2'>
+              <div className='flex items-center '>
                 <h3 className='mr-5 text-2xl'>
                   {item.area}
                 </h3>
@@ -151,7 +154,10 @@ console.log(workoutState)
               </div> 
             <Table>
               <TableRow >
-                <TableCell className="w-[150px] text-slate-500">Muscle Profile</TableCell>
+                {
+                  isSmallScreen ? null : <TableCell className="w-[150px] text-slate-500">Muscle Profile</TableCell>
+                }
+                
                 <TableCell className="w-[150px] text-slate-500">Reps</TableCell>
                 <TableCell className="w-[150px] text-slate-500">Weight</TableCell>
                 <TableCell className="w-[200px] text-slate-500">Notes</TableCell>

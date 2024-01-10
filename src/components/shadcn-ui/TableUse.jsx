@@ -1,5 +1,5 @@
 import {
-    Table,
+    Table as TableContainer,
     TableBody,
     TableCaption,
     TableCell,
@@ -13,7 +13,7 @@ import {
   
   export default function TableUse() {
     return (
-        <Table>
+        <TableContainer>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
@@ -31,7 +31,7 @@ import {
             <TableCell className="text-right">$250.00</TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </TableContainer>
       
     )
   }

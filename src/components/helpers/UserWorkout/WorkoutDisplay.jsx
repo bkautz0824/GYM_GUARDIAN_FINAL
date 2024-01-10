@@ -15,20 +15,23 @@ export default function WorkoutDisplay({workout, workoutId}) {
   const [workoutState, setWorkoutState] = useState([])
 
   useEffect(() => {
-    let state = []
+    let state = [];
     Object.keys(workout).forEach((key) => {
-      let valueInput = workout[key].value;
-      if (typeof valueInput === 'number' || typeof valueInput === 'string') {
-        let label = workout[key].label;
-        let description = workout[key].description;
-
-        state.push({
-          label: label,
-          description: description,
-          valueInput: valueInput,
-          editMode: false,
-          key: key
-        });
+      if (typeof workout[key] === 'object') {
+        console.log(workout[key], key)
+        let valueInput = workout[key].value
+        if (typeof valueInput === 'number' || typeof valueInput === 'string') {
+          let label = workout[key].label;
+          let description = workout[key].description;
+  
+          state.push({
+            label: label,
+            description: description,
+            valueInput: valueInput,
+            editMode: false,
+            key: key
+          });
+        }
       }
     });
 
@@ -94,8 +97,6 @@ export default function WorkoutDisplay({workout, workoutId}) {
         )
       );
 
-      // Display an alert
-      alert(`You may now edit ${workoutState[i].label} data`);
     }
   };
 
@@ -103,14 +104,14 @@ export default function WorkoutDisplay({workout, workoutId}) {
 
   
   return (
-    <Card className="p-6">
+    <Card className="p-6 max-sm:p-2">
       
      {workoutState.length > 0 ? (
         workoutState.map((item, i) => {
             return (
               <div key={item.label + i} className='m-2 '>
                 
-                <span className='flex items-center'>
+                <span className='flex items-center max-sm:flex-col max-sm:items-start max-sm:mb-1'>
                   <h3 className='mr-2'>{item.label}: </h3>
                   <TypographyMuted text={item.description}/>
                 </span>

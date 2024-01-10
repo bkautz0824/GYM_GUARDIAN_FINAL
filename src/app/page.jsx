@@ -23,10 +23,10 @@ export default async function Home() {
         <div className='flex flex-col p-5 text-white z-[2] justify-between  h-full'>
         
           
-          <Link href="/builder" className={buttonVariants({ variant: "default" })+ "  shadow-md shadow-black/50 text-white"}>View My Workouts</Link>
-          <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ "  shadow-md shadow-black/50 text-white"}>Workout Editor/Creator</Link>
-          <Link href="/data-display" className={buttonVariants({ variant: "default" })+ " shadow-md shadow-black/50 text-white"}>My Workout Data</Link>
-          <Link href="/calender" className={buttonVariants({ variant: "secondary" })+ "  shadow-md shadow-black/50 text-white"}>Calendar</Link>
+          <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ " shadow-xl hover:bg-secondary text-white hover:shadow-primary/80"}>View My Workouts</Link>
+          <Link href="/builder" className={buttonVariants({ variant: "secondary" })+ " shadow-xl hover:bg-secondary text-white hover:shadow-primary/80"}>Workout Editor/Creator</Link>
+          <Link href="/data-display" className={buttonVariants({ variant: "secondary" })+ " shadow-xl hover:bg-secondary text-white hover:shadow-primary/80"}>My Workout Data</Link>
+          <Link href="/calender" className={buttonVariants({ variant: "secondary" })+ "  shadow-xl hover:bg-secondary text-white hover:shadow-primary/80"}>Calendar</Link>
 
         </div>
 

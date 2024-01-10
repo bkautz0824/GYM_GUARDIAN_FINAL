@@ -9,6 +9,8 @@ import Link from "next/link"
 import { getServerSession } from "next-auth"
 import NextAuthProvider from "@/context/SessionPovider"
 import { NavLogin } from "@/components/helpers/NavLogin"
+import { HomeIcon } from '@radix-ui/react-icons';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,11 +34,11 @@ export default async function RootLayout({ children }) {
             >
         <NextAuthProvider session={session}>
              
-          <div className="my-8 bg-black"> {/* Increased padding for better spacing */}
-            <div className="max-w-screen-xl px-4 mx-auto"> {/* Center content with max-width */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center"> {/* Center the logo and text */}
-
+          <header className="my-8 bg-black"> {/* Increased padding for better spacing */}
+            <div className="w-full p-4 px-1 mx-auto"> {/* Center content with max-width */}
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center justify-between w-full"> {/* Center the logo and text */}
+                <NavLogin />
                 <Link href="/">
                   
                   <Image
@@ -48,18 +50,34 @@ export default async function RootLayout({ children }) {
                   />
 
                 </Link>
-                  <h1 className="ml-2 text-2xl font-bold text-white">Welcome to Gym Guardian</h1>
-                </div>
+                  <h1 className="ml-2 text-2xl font-bold text-white max-sm:hidden">Welcome to Gym Guardian</h1>
+                
                 <p className="text-sm text-gray-400">
                   &nbsp; B & D Developers
                 </p>
-                <DropDown display={"≡≡≡"} label={"Select a page"} items={"Home"}/>
+                {/* <DropDown display={"≡≡≡"} label={"Select a page"} items={"Home"}/> */}
+                <div className="flex items-center">
+                  <Link href="/" className="hover:scale-150">
+                  <HomeIcon className="scale-150"/>
+                </Link>
                 <ModeToggle />
+                </div>
+                
+                </div>
               </div>
             </div>
-          </div>
-          <NavLogin />
+          </header>
+        
+            
+                {/* <AvatarUse/> */}
+              {/* <DropDown display={"Navigation"} label={"Select a page"} items={"Home"}/> */}
+        
+      
             {children}  
+
+        <footer className="flex justify-center p-4">
+          GYM GUARDIAN
+        </footer>
         </NextAuthProvider>
         </ThemeProvider>
        

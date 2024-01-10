@@ -1,6 +1,7 @@
 // TableRowComponent.js
 
 import React from "react";
+import { useMediaQuery } from '@react-hook/media-query';
 import { Button } from "@/components/ui/button"
 import {
     TableCell,
@@ -19,21 +20,21 @@ const TableRowComponent = ({
 console.log(name, data)
 
 const [display, setDisplay] = React.useState(true)
-
-  
+const isSmallScreen = useMediaQuery('(max-width: 480px)');
+console.log(isSmallScreen)
 
   return (
     <>
     {
     data.length > 0 ?
-    <TableRow className="justify-center h-10 bg-secondary">
-      <TableCell colSpan={5} >
+    <TableRow className="justify-center h-10 bg-secondary max-sm:overflow-auto">
+      <TableCell colSpan={isSmallScreen ? 4 : 5} >
         <p className="text-lg hover:text-white">
           {name + ` x ${data.length}`}
         </p>
         
       </TableCell>
-      <TableCell className="justify-end">
+      <TableCell className="justify-end max-sm:justify-start" colSpan={isSmallScreen ? 2 : 1}>
         <Button variant='link'>
         {
           display ? <ChevronDownIcon className="w-10 h-7" onClick={() => setDisplay(false)}/> :

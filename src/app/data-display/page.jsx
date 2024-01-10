@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Card } from '@/components/ui/card'
 import DataGridDisplay from '@/components/recharts/DataGridDisplay';
 import { TypographyH1 } from '@/components/typography/Typography';
