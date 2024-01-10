@@ -37,7 +37,7 @@ import exercisesData from '@/data/GYM-GUARDIAN.Exercises'
 import { useBuilderContext } from '@/context/exercise-context'
 import Link from 'next/link'
 import { buttonVariants } from "@/components/ui/button"
-import { update } from 'lodash'
+
 // import { getExercises } from '@/api-requests/exercises-requests'
 
 export default function AreaOfFocus() {
@@ -46,7 +46,7 @@ export default function AreaOfFocus() {
   const [exercisesState, setExerciseState] = React.useState({
     exercises: [],
   })
-
+  console.log("exercises", exercisesData)
   const { workoutId, setWorkoutId } = useBuilderContext()
   console.log(workoutId)
   const [open, setOpen] = React.useState(false)
@@ -56,16 +56,15 @@ export default function AreaOfFocus() {
   console.log(state)
 
   React.useEffect(() => {
-    return () => {
+
       setLoading(false)
-      let activeGroup = exercisesData.filter((item) => item.muscle_group === area)
-      
+      const activeGroup = exercisesData.filter((item) => item.muscle_group === area)
+      console.log(activeGroup)
       setExerciseState({
         ...exercisesState,
         exercises:activeGroup[0].exercises,
       })
 
-    };
   }, [])
 
 
