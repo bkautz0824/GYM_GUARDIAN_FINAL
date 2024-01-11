@@ -11,7 +11,7 @@ import {
 
   import React from 'react'
   
-  export default function Table() {
+  export default function TableUse() {
     return (
         <TableContainer>
         <TableCaption>A list of your recent invoices.</TableCaption>

@@ -4,7 +4,7 @@ import './global.css'
 import AvatarUse from "@/components/shadcn-ui/AvatarUse"
 import { ModeToggle } from "@/components/shadcn-ui/ModeToggle"
 import DropDown from "@/components/shadcn-ui/DropDown"
-import Headerr from "@/components/newui/head"
+import Image from "next/image"
 import Link from "next/link"
 import { getServerSession } from "next-auth"
 import NextAuthProvider from "@/context/SessionPovider"
@@ -41,8 +41,9 @@ export default async function RootLayout({ children }) {
                 <NavLogin />
                 <Link href="/">
                   
-                  <img
+                  <Image
                     className="rounded-full"
+                    alt="GYMGUARDIAN"
                     src="https://ih1.redbubble.net/image.3440946030.3036/raf,750x1000,075,t,101010:01c5ca27c6.jpg"
                     width="40"
                     height="40"

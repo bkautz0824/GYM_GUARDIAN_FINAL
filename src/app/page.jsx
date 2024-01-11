@@ -1,6 +1,3 @@
-
-import Image from 'next/image'
-import { TypographyH1, TypographyP } from '@/components/typography/Typography'
 import Link from 'next/link'
 import { buttonVariants } from "@/components/ui/button"
 import { DotPattern } from '@/components/page-layouts/DotPattern'
