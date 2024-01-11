@@ -149,7 +149,10 @@ export default function AreaOfFocus() {
 
   const updateExerciseData = () => {
     console.log(workoutId, state, state.data)
-    if(state & state.length < 1){
+    let checker = state & state.length > 0 ? true : false
+    console.log(checker)
+
+    if(!checker){
       alert("You have not entered any data!")
     }else if(!workoutId){
       alert("You have not created a workout yet!")
