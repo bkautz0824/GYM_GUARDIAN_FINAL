@@ -115,8 +115,11 @@ export default function AreaOfFocus() {
       const updatedData = prevState[index].data.filter((item, currentIndex) => currentIndex !== i);
       if(updatedData.length < 1){
         console.log("empty", prevState)
-      }
-       {
+        console.log(i)
+        const filteredState = prevState.filter((item) => item.name !== name)
+        console.log(filteredState)
+        return filteredState
+      }else{
         return [
           ...prevState.slice(0, index),
           {
