@@ -9,7 +9,7 @@ import {
   import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { Input } from '@/components/ui/input';
 import { Button } from "@/components/ui/button"
-
+import { prodUrl } from "@/api-requests/api";
 
 export default function WorkoutDisplay({workout, workoutId}) {
   const [workoutState, setWorkoutState] = useState([])

@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { prodUrl } from "./api";
+import { prodUrl } from "@/api-requests/api";
 import { redirect, useParams } from 'next/navigation'
 import {
     Card,
