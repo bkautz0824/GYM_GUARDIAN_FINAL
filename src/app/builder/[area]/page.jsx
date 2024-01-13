@@ -42,7 +42,6 @@ import { buttonVariants } from "@/components/ui/button"
 
 export default function AreaOfFocus() {
   const {area} = useParams()
-  console.log(exercisesData)
   const [exercisesState, setExerciseState] = React.useState({
     exercises: [],
   })
@@ -53,19 +52,14 @@ export default function AreaOfFocus() {
   const [open, setOpen] = React.useState(false)
   const [state, setState] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true)
-
-  console.log(state)
-
   React.useEffect(() => {
-      console.log(exercisesData)
+
       let activeGroup = exercisesData.filter((item) => item.muscle_group === area)
       
       setExerciseState({
         ...exercisesState,
         exercises:activeGroup[0].exercises,
       })
-
-
   }, [])
 
 
@@ -115,9 +109,9 @@ export default function AreaOfFocus() {
     setState((prevState) =>{
       const updatedData = prevState[index].data.filter((item, currentIndex) => currentIndex !== i);
       if(updatedData.length < 1){
-        console.log("empty", prevState)
-      }
-       {
+        const filteredState = prevState.filter((item) => item.name !== name)
+        return filteredState
+      }else{
         return [
           ...prevState.slice(0, index),
           {
@@ -138,7 +132,6 @@ export default function AreaOfFocus() {
     setState((prevState) => {
       // Create a copy of the state
       const updatedState = [...prevState];
-      console.log( updatedState[rowIndex].data)
       updatedState[rowIndex].data[dataRowIndex][key] = value;
   
       return updatedState;
@@ -146,8 +139,11 @@ export default function AreaOfFocus() {
   };
 
   const updateExerciseData = () => {
-    console.log(workoutId, state, state.data)
-    if(state & state.length < 1){
+    console.log(workoutId, state, state.length)
+    let checker = state.length > 0 ? true : false
+    console.log(checker)
+
+    if(!checker){
       alert("You have not entered any data!")
     }else if(!workoutId){
       alert("You have not created a workout yet!")
