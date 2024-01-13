@@ -57,7 +57,7 @@ export default function WorkoutDisplay({workout, workoutId}) {
           );
       try {
         // Perform your fetch request here
-        const response = await fetch('http://localhost:3000/api/metaData', {
+        const response = await fetch(`${prodUrl}/api/metaData`, {
           method: 'PUT', // or 'POST' or 'PATCH' depending on your API
           headers: {
             'Content-Type': 'application/json',

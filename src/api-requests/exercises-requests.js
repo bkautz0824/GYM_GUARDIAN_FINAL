@@ -1,6 +1,8 @@
+import { prodUrl } from "./api";
+
 export const getExercises = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/exercises", {
+      const response = await fetch(`${prodUrl}/api/exercises`, {
         method: "GET",
       });
   

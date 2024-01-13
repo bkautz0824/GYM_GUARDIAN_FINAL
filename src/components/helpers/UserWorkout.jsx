@@ -1,4 +1,5 @@
 "use client"
+import { prodUrl } from '@/api-requests/api'
 import {useEffect, useState} from 'react'
 import {
     Card,
@@ -65,7 +66,7 @@ export default function UserWorkout({sessionData}) {
         console.log("found ya")
          const fetchEditWorkout = async () =>{
             try{
-                const response = await fetch(`http://localhost:3000/api/activeWorkout`,
+                const response = await fetch(`${prodUrl}/api/activeWorkout`,
                 {
                 method: "GET",
                 headers: {

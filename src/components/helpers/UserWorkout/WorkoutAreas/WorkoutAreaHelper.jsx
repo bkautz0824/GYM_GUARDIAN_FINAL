@@ -11,6 +11,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useMediaQuery } from '@react-hook/media-query';
+import { prodUrl } from '@/api-requests/api'
 
 export default function WorkoutAreaHelper({data, parentIndex, editMode, handleInputChange, workoutId, handleRowDelete}) {
   const isSmallScreen = useMediaQuery('(max-width: 480px)');
@@ -43,7 +44,7 @@ export default function WorkoutAreaHelper({data, parentIndex, editMode, handleIn
     }else{
       handleRowDelete(parentIndex, index)
       try {
-        const response = await fetch(`http://localhost:3000/api/entryUpdate`, {
+        const response = await fetch(`${prodUrl}/api/entryUpdate`, {
           method: "DELETE",
           headers: {
             'Content-Type': 'application/json',

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { TypographyH1, TypographyMuted, TypographyP, TypographyH3 } from '@/components/typography/Typography'
-import { reactProductionProfiling } from '../../../../next.config';
+import { prodUrl } from '@/api-requests/api'
 
 export default function CrudWorkout({isWorkoutData, workoutId, workout, updateState, user}) {
     console.log(isWorkoutData, workout)
@@ -14,7 +14,7 @@ export default function CrudWorkout({isWorkoutData, workoutId, workout, updateSt
           return;
         } else {
           try {
-            const response = await fetch(`http://localhost:3000/api/workout?id=${workoutId}`, {
+            const response = await fetch(`${prodUrl}/api/workout?id=${workoutId}`, {
               method: "DELETE",
               headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export default function CrudWorkout({isWorkoutData, workoutId, workout, updateSt
       
     const createWorkout = async() => {
       try {
-        const response = await fetch(`http://localhost:3000/api/workout`, {
+        const response = await fetch(`${prodUrl}/api/workout`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export default function CrudWorkout({isWorkoutData, workoutId, workout, updateSt
         if(confirm){
           console.log("yo")
           try {
-          const response = await fetch(`http://localhost:3000/api/workout?id=${workoutId}`, {
+          const response = await fetch(`${prodUrl}/api/workout?id=${workoutId}`, {
             method: "PATCH",
             headers: {
               'Content-Type': 'application/json',

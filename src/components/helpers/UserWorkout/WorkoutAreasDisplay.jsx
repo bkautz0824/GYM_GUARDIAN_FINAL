@@ -17,6 +17,7 @@ import {
 import { Button } from '@/components/ui/button'
 import WorkoutAreaHelper from './WorkoutAreas/WorkoutAreaHelper'
 import { useMediaQuery } from '@react-hook/media-query';
+import { prodUrl } from '@/api-requests/api'
 
 
 export default function WorkoutAreasDisplay({workoutData, workoutId, updateState}) {
@@ -94,7 +95,7 @@ console.log(workoutData)
 
     try {
 
-      const response = await fetch(`http://localhost:3000/api/entryUpdate`, {
+      const response = await fetch(`${prodUrl}/api/entryUpdate`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

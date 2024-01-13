@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { prodUrl } from "./api";
 import { redirect, useParams } from 'next/navigation'
 import {
     Card,
@@ -151,7 +152,7 @@ export default function AreaOfFocus() {
     else{
       const submitData = async () => {
         try{
-          const response = await fetch(`http://localhost:3000/api/workout`,
+          const response = await fetch(`${prodUrl}/api/workout`,
           {
             method: "PUT",
             headers: {
